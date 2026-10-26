@@ -66,7 +66,14 @@ export const promoTeaser = {
   text: '实时折射、柔和高光、会流动的选择镜片。一套为游戏内覆盖层重新打造的 Liquid Glass 界面，已在界面预览页开放逐项对比与控件试玩。',
   href: 'promo/',
   image: 'promo/img/new-plugins.webp',
-  imageAlt: 'Liquid Glass 版插件页'
+  imageAlt: 'Liquid Glass 版插件页',
+  /** 首屏公告条 */
+  announce: {
+    badge: 'NEW',
+    title: 'Anomaly UI · Liquid Glass 全新界面',
+    text: '实时折射、流动镜片，新旧版逐项对比',
+    cta: '查看界面预览'
+  }
 }
 
 export const features = [

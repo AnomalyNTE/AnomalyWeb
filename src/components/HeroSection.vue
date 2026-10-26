@@ -1,5 +1,7 @@
 <script setup>
-import { asset, downloads, meta } from '../data/site.js'
+import { asset, downloads, meta, pageRoot, promoTeaser } from '../data/site.js'
+
+const promoHref = `${pageRoot}${promoTeaser.href}`
 </script>
 
 <template>
@@ -7,6 +9,15 @@ import { asset, downloads, meta } from '../data/site.js'
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-text">
+        <a class="announce" :href="promoHref">
+          <span class="announce-badge">{{ promoTeaser.announce.badge }}</span>
+          <span class="announce-copy">
+            <b>{{ promoTeaser.announce.title }}</b>
+            <span>{{ promoTeaser.announce.text }}</span>
+          </span>
+          <span class="announce-cta">{{ promoTeaser.announce.cta }} →</span>
+        </a>
+
         <h1>{{ meta.name }} <span class="grad">{{ meta.cnName }}</span></h1>
         <p class="tagline">{{ meta.tagline }}</p>
         <p class="lede">
@@ -29,8 +40,13 @@ import { asset, downloads, meta } from '../data/site.js'
           </a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <img :src="asset('logo.png')" alt="" width="360" height="360" />
+
+      <div class="hero-art">
+        <a class="hero-preview" :href="promoHref" :aria-label="promoTeaser.imageAlt">
+          <img :src="asset(promoTeaser.image)" :alt="promoTeaser.imageAlt" width="1180" height="680" />
+          <span class="hero-preview-tag">{{ promoTeaser.announce.badge }}</span>
+          <span class="hero-preview-cta">{{ promoTeaser.announce.cta }} →</span>
+        </a>
       </div>
     </div>
   </section>

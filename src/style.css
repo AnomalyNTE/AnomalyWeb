@@ -207,7 +207,7 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 
 .hero-inner {
   position: relative;
-  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr);
+  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
   gap: 2.5rem; align-items: center;
 }
 
@@ -221,19 +221,81 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 
 .cta { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 0; }
 
+/* ---------- 首屏：Liquid Glass 更新公告 ---------- */
+
+.announce {
+  display: inline-flex; align-items: center; gap: .6rem;
+  max-width: 100%; margin-bottom: 1.15rem;
+  padding: .38rem .55rem .38rem .42rem;
+  border: 1px solid transparent; border-radius: 999px;
+  background:
+    linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
+    linear-gradient(100deg, var(--accent), var(--accent-2)) border-box;
+  color: var(--text);
+  box-shadow: 0 16px 36px -24px color-mix(in srgb, var(--accent) 85%, transparent);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.announce:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 20px 42px -22px color-mix(in srgb, var(--accent) 95%, transparent);
+}
+.announce-badge {
+  flex: none;
+  font-family: var(--mono); font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+  color: var(--accent-ink);
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  padding: .22rem .5rem; border-radius: 999px;
+}
+.announce-copy { display: flex; flex-direction: column; text-align: left; line-height: 1.32; min-width: 0; }
+.announce-copy b { font-size: .88rem; font-weight: 600; }
+.announce-copy span { font-size: .76rem; color: var(--text-mute); }
+.announce-cta {
+  flex: none; padding-right: .5rem;
+  font-size: .8rem; font-weight: 600; color: var(--accent); white-space: nowrap;
+}
+
+/* ---------- 首屏主视觉：新界面预览 ---------- */
+
 .hero-art { display: grid; place-items: center; }
-.hero-art img {
-  width: 100%; max-width: 360px; border-radius: 24px;
-  filter: drop-shadow(0 30px 60px rgba(53, 224, 230, .18));
-  animation: float 9s ease-in-out infinite;
+
+.hero-preview {
+  position: relative; display: block; width: 100%;
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow:
+    0 34px 80px -40px rgba(0, 0, 0, .8),
+    0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-@keyframes float {
-  0%, 100% { transform: translateY(-6px) rotate(-1deg); }
-  50% { transform: translateY(6px) rotate(1deg); }
+.hero-preview img { display: block; width: 100%; height: auto; }
+.hero-preview:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong));
+  box-shadow:
+    0 40px 90px -38px rgba(0, 0, 0, .85),
+    0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent),
+    0 0 44px -12px color-mix(in srgb, var(--accent) 55%, transparent);
 }
+.hero-preview-tag {
+  position: absolute; top: 10px; left: 10px;
+  font-family: var(--mono); font-size: .64rem; font-weight: 700; letter-spacing: .1em;
+  color: var(--accent-ink);
+  background: linear-gradient(100deg, var(--accent), var(--accent-2));
+  padding: .2rem .45rem; border-radius: 999px;
+}
+.hero-preview-cta {
+  position: absolute; right: 10px; bottom: 10px;
+  font-size: .76rem; font-weight: 600; color: var(--text);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  padding: .28rem .6rem;
+  backdrop-filter: blur(8px);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-art img { animation: none; }
   html { scroll-behavior: auto; }
+  .hero-preview, .announce { transition: none; }
 }
 
 /* ---------------- 界面预览预告（/promo） ---------------- */
@@ -432,8 +494,6 @@ tbody td b { color: var(--text); font-weight: 600; }
 
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; gap: 1.6rem; }
-  .hero-art { order: -1; }
-  .hero-art img { max-width: 200px; }
   .nav { display: none; }
   .topbar-inner { justify-content: space-between; }
   .topbar-actions { margin-left: auto; }
