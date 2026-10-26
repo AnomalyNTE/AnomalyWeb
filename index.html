@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anomaly 异象 · 《异环》插件平台</title>
+  <meta name="description" content="Anomaly 异象：稳定、灵活、开放的《异环》插件平台。游戏内管理界面、第三方插件下载、纯 C ABI v1 SDK 与完整插件生命周期。" />
+  <meta name="theme-color" content="#0b0e14" />
+  <meta property="og:title" content="Anomaly 异象 · 《异环》插件平台" />
+  <meta property="og:description" content="稳定、灵活、开放的《异环》插件平台。Windows x64 · C++20 · Plugin ABI v1 · AGPL-3.0-only" />
+  <meta property="og:image" content="/logo.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <script>
+    // 首屏前先定主题，避免深色页面闪白；?theme=dark|light 可直接指定
+    try {
+      var q = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
+      var saved = q === 'dark' || q === 'light' ? q : localStorage.getItem('anomaly-theme');
+      var light = saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches);
+      document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
