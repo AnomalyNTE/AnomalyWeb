@@ -1,11 +1,21 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { asset, links, meta, navItems } from '../data/site.js'
+import { asset, links, meta, navItems, pageRoot } from '../data/site.js'
+
+const props = defineProps({
+  /** 当前页面标识：'home' | 'promo' */
+  current: { type: String, default: 'home' },
+  /** /promo 页固定深色玻璃风格，不显示主题开关 */
+  themeToggle: { type: Boolean, default: true }
+})
 
 const theme = ref('dark')
 const active = ref('')
 const progress = ref(0)
 const STORAGE_KEY = 'anomaly-theme'
+
+const hrefOf = (item) => `${pageRoot}${item.href}`
+const sectionItems = navItems.filter((item) => item.href.startsWith('#'))
 
 function applyTheme(next) {
   theme.value = next
@@ -32,7 +42,7 @@ function onScroll() {
 
   const line = window.scrollY + 96
   let current = ''
-  for (const item of navItems) {
+  for (const item of sectionItems) {
     const el = document.querySelector(item.href)
     if (el && el.offsetTop <= line) current = item.href
   }
@@ -49,18 +59,20 @@ function scheduleScroll() {
 }
 
 onMounted(() => {
-  const query = (new URLSearchParams(location.search).get('theme') || '').toLowerCase()
-  let saved = null
-  try {
-    saved = localStorage.getItem(STORAGE_KEY)
-  } catch {
-    /* ignore */
+  if (props.themeToggle) {
+    const query = (new URLSearchParams(location.search).get('theme') || '').toLowerCase()
+    let saved = null
+    try {
+      saved = localStorage.getItem(STORAGE_KEY)
+    } catch {
+      /* ignore */
+    }
+    if (query === 'dark' || query === 'light') saved = query
+    const prefersLight =
+      saved === 'light' ||
+      (!saved && window.matchMedia?.('(prefers-color-scheme: light)').matches)
+    applyTheme(prefersLight ? 'light' : 'dark')
   }
-  if (query === 'dark' || query === 'light') saved = query
-  const prefersLight =
-    saved === 'light' ||
-    (!saved && window.matchMedia?.('(prefers-color-scheme: light)').matches)
-  applyTheme(prefersLight ? 'light' : 'dark')
 
   window.addEventListener('scroll', scheduleScroll, { passive: true })
   window.addEventListener('resize', scheduleScroll)
@@ -76,7 +88,7 @@ onBeforeUnmount(() => {
 <template>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="#top">
+      <a class="brand" :href="pageRoot">
         <img :src="asset('favicon.png')" alt="" width="28" height="28" />
         <span>Anomaly <b>{{ meta.cnName }}</b></span>
       </a>
@@ -85,8 +97,11 @@ onBeforeUnmount(() => {
         <a
           v-for="item in navItems"
           :key="item.href"
-          :href="item.href"
-          :class="{ active: active === item.href }"
+          :href="hrefOf(item)"
+          :class="{
+            active: item.page ? item.page === current : active === item.href,
+            'nav-accent': item.page
+          }"
         >
           {{ item.label }}
         </a>
@@ -94,6 +109,7 @@ onBeforeUnmount(() => {
 
       <div class="topbar-actions">
         <button
+          v-if="themeToggle"
           class="icon-btn"
           type="button"
           :aria-label="theme === 'light' ? '切换到深色主题' : '切换到浅色主题'"

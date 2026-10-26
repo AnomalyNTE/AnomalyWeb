@@ -151,6 +151,8 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 }
 .nav a:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
 .nav a.active { color: var(--accent); }
+.nav a.nav-accent { color: var(--accent); }
+.nav a.nav-accent:hover { color: var(--accent); }
 
 .topbar-actions { display: flex; align-items: center; gap: .5rem; }
 
@@ -232,6 +234,33 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 @media (prefers-reduced-motion: reduce) {
   .hero-art img { animation: none; }
   html { scroll-behavior: auto; }
+}
+
+/* ---------------- 界面预览预告（/promo） ---------------- */
+
+.teaser {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 2rem; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+.teaser-art {
+  display: block; border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--border); line-height: 0;
+}
+.teaser-art img { width: 100%; transition: transform .4s ease; }
+.teaser-art:hover img { transform: scale(1.02); }
+.teaser-text h3 { font-size: 1.28rem; margin-bottom: .5rem; }
+.teaser-text p { color: var(--text-dim); font-size: .96rem; }
+.teaser-list {
+  margin: .2rem 0 1.2rem; padding-left: 1.1rem;
+  color: var(--text-dim); font-size: .92rem;
+  display: grid; gap: .3rem;
+}
+
+@media (max-width: 860px) {
+  .teaser { grid-template-columns: 1fr; gap: 1.2rem; }
 }
 
 /* ---------------- Sections ---------------- */

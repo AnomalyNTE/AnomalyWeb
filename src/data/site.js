@@ -59,6 +59,16 @@ export const downloads = [
   }
 ]
 
+/** 首页上的 Liquid Glass 界面预告（对应 /promo 页面） */
+export const promoTeaser = {
+  eyebrow: 'Anomaly UI · 全新设计',
+  title: '透过玻璃，看见你的世界。',
+  text: '实时折射、柔和高光、会流动的选择镜片。一套为游戏内覆盖层重新打造的 Liquid Glass 界面，已在界面预览页开放逐项对比与控件试玩。',
+  href: 'promo/',
+  image: 'promo/img/new-plugins.webp',
+  imageAlt: 'Liquid Glass 版插件页'
+}
+
 export const features = [
   {
     icon: '🚀',
@@ -218,7 +228,19 @@ export const navItems = [
   { href: '#market', label: '第三方插件' },
   { href: '#install', label: '快速上手' },
   { href: '#faq', label: '常见问题' },
-  { href: '#docs', label: '文档' }
+  { href: '#docs', label: '文档' },
+  { href: 'promo/', label: '界面预览', page: 'promo' }
 ]
 
-export const asset = (name) => `${import.meta.env.BASE_URL}${name}`
+/**
+ * 当前页面到站点根目录的相对前缀（由各入口 HTML 的 <meta name="site-root"> 声明）：
+ * 首页是 './'，/promo/ 页面是 '../'。借助它，public 下的资源在任意深度页面都能正确引用。
+ */
+export const pageRoot =
+  (typeof document !== 'undefined' &&
+    document.querySelector('meta[name="site-root"]')?.getAttribute('content')) ||
+  import.meta.env.BASE_URL
+
+/** 引用 public/ 下的资源：asset('logo.png')、asset('promo/img/new-plugins.webp') */
+export const asset = (name) => `${pageRoot}${name}`
+
