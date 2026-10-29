@@ -1,12 +1,12 @@
 <script setup>
-import { docCards, links } from '../data/site.js'
+import { docCards, docs } from '../data/site.js'
 </script>
 
 <template>
   <section class="wrap section" id="docs">
     <header class="section-head">
-      <h2>文档</h2>
-      <p>全部文档托管在主仓库。</p>
+      <h2>{{ docs.title }}</h2>
+      <p>{{ docs.sub }}</p>
     </header>
 
     <div class="grid grid-3">
@@ -23,11 +23,6 @@ import { docCards, links } from '../data/site.js'
       </a>
     </div>
 
-    <p class="muted small">
-      仓库内另有
-      <a :href="links.architecture" target="_blank" rel="noreferrer">架构概览</a>
-      与四个独立 SDK 示例，新插件仓库可从
-      <a :href="links.template" target="_blank" rel="noreferrer">Anomaly 插件模板</a> 开始。
-    </p>
+    <p class="muted small" v-html="docs.footnote"></p>
   </section>
 </template>

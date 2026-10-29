@@ -1,9 +1,21 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { asset, links, meta, navItems, pageRoot } from '../data/site.js'
+import {
+  asset,
+  links,
+  meta,
+  navHref,
+  navItems,
+  pageRoot,
+  switchCode,
+  switchHref,
+  switchLabel,
+  switchTitle,
+  ui
+} from '../data/site.js'
 
 const props = defineProps({
-  /** 当前页面标识：'home' | 'promo' */
+  /** 当前页面标识：'home' | 'promo'（同时用于语言切换时的同名页面跳转） */
   current: { type: String, default: 'home' },
   /** /promo 页固定深色玻璃风格，不显示主题开关 */
   themeToggle: { type: Boolean, default: true }
@@ -14,8 +26,7 @@ const active = ref('')
 const progress = ref(0)
 const STORAGE_KEY = 'anomaly-theme'
 
-const hrefOf = (item) => `${pageRoot}${item.href}`
-const sectionItems = navItems.filter((item) => item.href.startsWith('#'))
+const sectionItems = navItems.filter((item) => item.href?.startsWith('#'))
 
 function applyTheme(next) {
   theme.value = next
@@ -90,14 +101,14 @@ onBeforeUnmount(() => {
     <div class="wrap topbar-inner">
       <a class="brand" :href="pageRoot">
         <img :src="asset('favicon.png')" alt="" width="28" height="28" />
-        <span>Anomaly <b>{{ meta.cnName }}</b></span>
+        <span>{{ meta.name }} <b v-if="meta.cnName">{{ meta.cnName }}</b></span>
       </a>
 
-      <nav class="nav" aria-label="主导航">
+      <nav class="nav" :aria-label="ui.navAria">
         <a
           v-for="item in navItems"
-          :key="item.href"
-          :href="hrefOf(item)"
+          :key="item.page || item.href"
+          :href="navHref(item, current)"
           :class="{
             active: item.page ? item.page === current : active === item.href,
             'nav-accent': item.page
@@ -108,12 +119,21 @@ onBeforeUnmount(() => {
       </nav>
 
       <div class="topbar-actions">
+        <a
+          class="icon-btn lang-btn"
+          :href="switchHref(current)"
+          :hreflang="switchCode"
+          :title="switchTitle"
+          :aria-label="switchTitle"
+        >
+          {{ switchLabel }}
+        </a>
         <button
           v-if="themeToggle"
           class="icon-btn"
           type="button"
-          :aria-label="theme === 'light' ? '切换到深色主题' : '切换到浅色主题'"
-          title="切换主题"
+          :aria-label="theme === 'light' ? ui.themeToDark : ui.themeToLight"
+          :title="ui.themeTitle"
           @click="toggleTheme"
         >
           ◐

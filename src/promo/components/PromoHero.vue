@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { asset, links } from '../../data/site.js'
+import { asset, promo } from '../../data/site.js'
+
+const copy = promo.hero
 
 const shot = ref(null)
 const tilt = ref('')
@@ -21,22 +23,13 @@ function onMove(event) {
 function onLeave() {
   tilt.value = ''
 }
-
-const jumps = [
-  { href: '#compare', label: '新旧对比' },
-  { href: '#glass', label: '液态玻璃' },
-  { href: '#details', label: '细节' },
-  { href: '#gallery', label: '插件画廊' }
-]
 </script>
 
 <template>
   <header class="promo-hero">
-    <p v-reveal class="promo-eyebrow">Anomaly UI · 全新设计</p>
-    <h1 v-reveal="{ delay: 0.05 }">透过玻璃，<br /><span class="grad">看见你的世界。</span></h1>
-    <p v-reveal="{ delay: 0.1 }" class="promo-lede">
-      实时折射、柔和高光、会流动的选择镜片。<br />一套为游戏内覆盖层重新打造的 Liquid Glass 界面。
-    </p>
+    <p v-reveal class="promo-eyebrow">{{ copy.eyebrow }}</p>
+    <h1 v-reveal="{ delay: 0.05 }" v-html="copy.title"></h1>
+    <p v-reveal="{ delay: 0.1 }" class="promo-lede" v-html="copy.lede"></p>
 
     <div
       ref="shot"
@@ -46,20 +39,16 @@ const jumps = [
       @pointermove="onMove"
       @pointerleave="onLeave"
     >
-      <img :src="asset('promo/img/new-plugins.webp')" alt="Liquid Glass 版插件页" />
+      <img :src="asset('promo/img/new-plugins.webp')" :alt="copy.shotAlt" />
       <div class="shine"></div>
     </div>
 
-    <nav v-reveal="{ delay: 0.2 }" class="promo-jump glass" aria-label="页内导航">
-      <a v-for="item in jumps" :key="item.href" :href="item.href">{{ item.label }}</a>
+    <nav v-reveal="{ delay: 0.2 }" class="promo-jump glass" :aria-label="copy.jumpAria">
+      <a v-for="item in copy.jumps" :key="item.href" :href="item.href">{{ item.label }}</a>
     </nav>
 
-    <div class="promo-scroll-hint">向下滚动</div>
+    <div class="promo-scroll-hint">{{ copy.scrollHint }}</div>
 
-    <p v-reveal="{ delay: 0.25 }" class="promo-hero-meta">
-      现已在
-      <a :href="links.repo" target="_blank" rel="noreferrer">Anomaly 主仓库</a>
-      的 <code>feat/liquid-glass-ui</code> 分支开发。
-    </p>
+    <p v-reveal="{ delay: 0.25 }" class="promo-hero-meta" v-html="copy.meta"></p>
   </header>
 </template>

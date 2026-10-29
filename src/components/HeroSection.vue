@@ -1,7 +1,8 @@
 <script setup>
-import { asset, downloads, meta, pageRoot, promoTeaser } from '../data/site.js'
+import { asset, downloads, entry, meta, promoTeaser, t } from '../data/site.js'
 
-const promoHref = `${pageRoot}${promoTeaser.href}`
+const promoHref = entry('promo')
+const heroText = t.hero.lede
 </script>
 
 <template>
@@ -18,12 +19,9 @@ const promoHref = `${pageRoot}${promoTeaser.href}`
           <span class="announce-cta">{{ promoTeaser.announce.cta }} →</span>
         </a>
 
-        <h1>{{ meta.name }} <span class="grad">{{ meta.cnName }}</span></h1>
+        <h1>{{ meta.name }} <span v-if="meta.cnName" class="grad">{{ meta.cnName }}</span></h1>
         <p class="tagline">{{ meta.tagline }}</p>
-        <p class="lede">
-          解压 Runtime，选中 <code>HTGame.exe</code> 所在目录即可安装；按 <kbd>Insert</kbd>
-          呼出游戏内管理界面，启用内建插件、浏览社区插件、查看诊断状态，一个入口全部搞定。
-        </p>
+        <p class="lede" v-html="heroText"></p>
 
         <div class="cta">
           <a

@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { plugins } from '../data/site.js'
+import { plugins, pluginsSection } from '../data/site.js'
 
 const query = ref('')
 
@@ -19,16 +19,16 @@ const filtered = computed(() => {
 <template>
   <section class="wrap section" id="plugins">
     <header class="section-head">
-      <h2>内建插件</h2>
-      <p>随运行包提供，默认全部关闭。输入关键词可筛选，例如「相机」「自动」「ESP」。</p>
+      <h2>{{ pluginsSection.title }}</h2>
+      <p>{{ pluginsSection.sub }}</p>
     </header>
 
     <div class="search">
       <input
         v-model="query"
         type="search"
-        placeholder="搜索内建插件…"
-        aria-label="搜索内建插件"
+        :placeholder="pluginsSection.placeholder"
+        :aria-label="pluginsSection.searchAria"
         autocomplete="off"
         @keydown.esc="query = ''"
       />
@@ -42,6 +42,6 @@ const filtered = computed(() => {
       </article>
     </div>
 
-    <p v-if="!filtered.length" class="grid-empty">没有匹配的内建插件，换个关键词试试。</p>
+    <p v-if="!filtered.length" class="grid-empty">{{ pluginsSection.empty }}</p>
   </section>
 </template>

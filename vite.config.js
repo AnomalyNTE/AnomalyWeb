@@ -6,7 +6,7 @@ const page = (path) => fileURLToPath(new URL(path, import.meta.url))
 
 // base: './' —— 产物用相对路径引用资源，
 // 因此同一份 dist 既能部署到 <user>.github.io/<repo>/ 也能部署到自定义域名根路径。
-// 多页构建：首页 index.html + 界面预览 promo/index.html。
+// 多页构建：中文首页/界面预览在根目录，英文版在同构的 /en/ 子目录。
 export default defineConfig({
   base: './',
   plugins: [vue()],
@@ -17,7 +17,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: page('./index.html'),
-        promo: page('./promo/index.html')
+        promo: page('./promo/index.html'),
+        en: page('./en/index.html'),
+        enPromo: page('./en/promo/index.html')
       }
     }
   }

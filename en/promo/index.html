@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-locale="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anomaly Liquid Glass · UI preview</title>
+  <meta name="description" content="The all-new Anomaly Liquid Glass interface: real-time refraction, soft highlights, flowing selection lenses, plus a side-by-side comparison with the previous UI." />
+  <meta name="theme-color" content="#120e22" />
+  <meta name="site-root" content="../../" />
+  <meta name="locale-switch" content="../../promo/" />
+  <meta property="og:title" content="Anomaly Liquid Glass · UI preview" />
+  <meta property="og:description" content="Through the glass, see your world. An interface rebuilt for the in-game overlay." />
+  <meta property="og:image" content="/promo/img/new-plugins.webp" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.png" />
+  <script>
+    // 语言引导：?lang= 显式指定 > 本地记住的偏好 > 浏览器语言；与当前页面声明的语言
+    // 不一致时，在首屏渲染前跳到对应语言的同一页面（replace，不留历史记录）
+    (function () {
+      try {
+        var KEY = 'anomaly-lang';
+        function norm(v) {
+          v = String(v || '').toLowerCase();
+          if (v.indexOf('zh') === 0) return 'zh';
+          if (v.indexOf('en') === 0) return 'en';
+          return '';
+        }
+        var params = new URLSearchParams(location.search);
+        var explicit = norm(params.get('lang'));
+        if (explicit) localStorage.setItem(KEY, explicit);
+        var stored = norm(localStorage.getItem(KEY));
+        var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+        var detected = 'en';
+        for (var i = 0; i < langs.length; i++) {
+          var hit = norm(langs[i]);
+          if (hit) { detected = hit; break; }
+        }
+        var want = explicit || stored || detected;
+        var here = norm(document.documentElement.getAttribute('data-locale'));
+        var switcher = document.querySelector('meta[name="locale-switch"]');
+        if (want && here && want !== here && switcher) {
+          var query = ['lang=' + want];
+          var theme = params.get('theme');
+          if (theme) query.push('theme=' + encodeURIComponent(theme));
+          // 语言页面锚点 id 一致，所以 hash 一起带过去
+          location.replace(switcher.getAttribute('content') + '?' + query.join('&') + location.hash);
+        }
+      } catch (e) { /* 隐私模式等异常：保持当前语言 */ }
+    })();
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/promo/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-locale="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anomaly · Plugin platform for Neverness To Everness</title>
+  <meta name="description" content="Anomaly is a stable, flexible and open plugin platform for Neverness To Everness: an in-game manager, community plugin downloads, a pure C ABI v1 SDK and a full plugin lifecycle." />
+  <meta name="theme-color" content="#0b0e14" />
+  <meta name="site-root" content="../" />
+  <meta name="locale-switch" content="../" />
+  <meta property="og:title" content="Anomaly · Plugin platform for Neverness To Everness" />
+  <meta property="og:description" content="Stable, flexible and open. Windows x64 · C++20 · Plugin ABI v1 · AGPL-3.0-only" />
+  <meta property="og:image" content="/logo.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <script>
+    // 首屏前先定主题，避免深色页面闪白；?theme=dark|light 可直接指定
+    try {
+      var q = (new URLSearchParams(location.search).get('theme') || '').toLowerCase();
+      var saved = q === 'dark' || q === 'light' ? q : localStorage.getItem('anomaly-theme');
+      var light = saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches);
+      document.documentElement.setAttribute('data-theme', light ? 'light' : 'dark');
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+  <script>
+    // 语言引导：?lang= 显式指定 > 本地记住的偏好 > 浏览器语言；与当前页面声明的语言
+    // 不一致时，在首屏渲染前跳到对应语言的同一页面（replace，不留历史记录）
+    (function () {
+      try {
+        var KEY = 'anomaly-lang';
+        function norm(v) {
+          v = String(v || '').toLowerCase();
+          if (v.indexOf('zh') === 0) return 'zh';
+          if (v.indexOf('en') === 0) return 'en';
+          return '';
+        }
+        var params = new URLSearchParams(location.search);
+        var explicit = norm(params.get('lang'));
+        if (explicit) localStorage.setItem(KEY, explicit);
+        var stored = norm(localStorage.getItem(KEY));
+        var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+        var detected = 'en';
+        for (var i = 0; i < langs.length; i++) {
+          var hit = norm(langs[i]);
+          if (hit) { detected = hit; break; }
+        }
+        var want = explicit || stored || detected;
+        var here = norm(document.documentElement.getAttribute('data-locale'));
+        var switcher = document.querySelector('meta[name="locale-switch"]');
+        if (want && here && want !== here && switcher) {
+          var query = ['lang=' + want];
+          var theme = params.get('theme');
+          if (theme) query.push('theme=' + encodeURIComponent(theme));
+          // 语言页面锚点 id 一致，所以 hash 一起带过去
+          location.replace(switcher.getAttribute('content') + '?' + query.join('&') + location.hash);
+        }
+      } catch (e) { /* 隐私模式等异常：保持当前语言 */ }
+    })();
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

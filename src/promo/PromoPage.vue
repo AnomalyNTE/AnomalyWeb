@@ -7,8 +7,9 @@ import CompareSection from './components/CompareSection.vue'
 import GlassDemos from './components/GlassDemos.vue'
 import DetailsSection from './components/DetailsSection.vue'
 import GallerySection from './components/GallerySection.vue'
-import { asset, links, pageRoot } from '../data/site.js'
+import { asset, entry, links, promo } from '../data/site.js'
 
+const homeHref = entry('home')
 const blur = ref(0)
 let ticking = false
 
@@ -47,12 +48,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
       <GallerySection />
 
       <section class="end">
-        <h2 v-reveal><span class="grad">Anomaly</span> Liquid Glass</h2>
-        <p v-reveal="{ delay: 0.05 }">现已在 <code>feat/liquid-glass-ui</code> 分支。</p>
+        <h2 v-reveal v-html="promo.end.title"></h2>
+        <p v-reveal="{ delay: 0.05 }" v-html="promo.end.text"></p>
         <div v-reveal="{ delay: 0.1 }" class="end-links">
-          <a :href="pageRoot">返回官网首页</a>
-          <a :href="pageRoot + '#plugins'">内建插件</a>
-          <a :href="links.repo" target="_blank" rel="noreferrer">源码仓库</a>
+          <a :href="homeHref">{{ promo.end.home }}</a>
+          <a :href="homeHref + '#plugins'">{{ promo.end.plugins }}</a>
+          <a :href="links.repo" target="_blank" rel="noreferrer">{{ promo.end.repo }}</a>
         </div>
       </section>
     </main>

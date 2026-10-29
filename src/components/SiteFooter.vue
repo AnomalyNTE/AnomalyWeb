@@ -1,5 +1,5 @@
 <script setup>
-import { asset, links, meta } from '../data/site.js'
+import { asset, copyright, footer, links, meta } from '../data/site.js'
 
 const year = new Date().getFullYear()
 </script>
@@ -10,37 +10,35 @@ const year = new Date().getFullYear()
       <div class="footer-brand">
         <img :src="asset('favicon.png')" alt="" width="32" height="32" />
         <div>
-          <strong>Anomaly {{ meta.cnName }}</strong>
+          <strong>{{ meta.name }}<template v-if="meta.cnName"> {{ meta.cnName }}</template></strong>
           <p class="muted small">{{ meta.tagline }}</p>
         </div>
       </div>
 
       <div class="footer-links">
         <div>
-          <h4>项目</h4>
-          <a :href="links.repo" target="_blank" rel="noreferrer">源码仓库</a>
-          <a :href="links.releases" target="_blank" rel="noreferrer">发布页</a>
-          <a :href="links.license" target="_blank" rel="noreferrer">许可证</a>
-          <a :href="links.notice" target="_blank" rel="noreferrer">NOTICE</a>
+          <h4>{{ footer.project }}</h4>
+          <a :href="links.repo" target="_blank" rel="noreferrer">{{ footer.source }}</a>
+          <a :href="links.releases" target="_blank" rel="noreferrer">{{ footer.releases }}</a>
+          <a :href="links.license" target="_blank" rel="noreferrer">{{ footer.license }}</a>
+          <a :href="links.notice" target="_blank" rel="noreferrer">{{ footer.notice }}</a>
         </div>
         <div>
-          <h4>文档</h4>
-          <a :href="links.userGuide" target="_blank" rel="noreferrer">用户文档</a>
-          <a :href="links.developerGuide" target="_blank" rel="noreferrer">开发者文档</a>
-          <a :href="links.apiReference" target="_blank" rel="noreferrer">API 参考</a>
+          <h4>{{ footer.docs }}</h4>
+          <a :href="links.userGuide" target="_blank" rel="noreferrer">{{ footer.userGuide }}</a>
+          <a :href="links.developerGuide" target="_blank" rel="noreferrer">{{ footer.developerGuide }}</a>
+          <a :href="links.apiReference" target="_blank" rel="noreferrer">{{ footer.apiReference }}</a>
         </div>
         <div>
-          <h4>社区</h4>
-          <span class="muted small">QQ 群 {{ meta.qq }}</span>
-          <a :href="links.issues" target="_blank" rel="noreferrer">问题反馈</a>
+          <h4>{{ footer.community }}</h4>
+          <span class="muted small">{{ footer.qq }} {{ meta.qq }}</span>
+          <a :href="links.issues" target="_blank" rel="noreferrer">{{ footer.issues }}</a>
         </div>
       </div>
     </div>
 
     <div class="wrap footer-bottom">
-      <p class="muted small">
-        © {{ year }} AnomalyNTE · 以 GNU Affero General Public License v3.0（{{ meta.license }}）分发.
-      </p>
+      <p class="muted small">{{ copyright(year) }}</p>
     </div>
   </footer>
 </template>

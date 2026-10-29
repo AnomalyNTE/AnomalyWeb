@@ -6,6 +6,8 @@
 - 首页：Hero（三个下载渠道）/ 特性 / Liquid Glass 界面预告 / 内建插件（可搜索）/ 第三方插件 /
   快速上手 / FAQ / 文档
 - `/promo/`：**Anomaly UI · Liquid Glass** 界面预览页（新旧对比拖动、玻璃控件试玩、细节与插件画廊、演示视频）
+- 中英双语：中文在站点根目录，英文在同构的 `/en/`、`/en/promo/`；**首次访问按浏览器语言自动跳转**，
+  右上角按钮可手动切换（选择记进 `localStorage`），也支持 `?lang=zh|en` 直接指定
 - 深色为默认主题，带浅色主题切换（记忆到 `localStorage`，也支持 `?theme=dark|light`）；`/promo/` 固定深色玻璃风格
 - 零第三方 UI 依赖，只有一个运行时依赖 `vue`；无外部 CDN 请求
 - `base: './'`，同一份 `dist` 放在 `https://<user>.github.io/<repo>/` 或自定义域名根路径都能用
@@ -14,26 +16,51 @@
 
 ```powershell
 npm install
-npm run dev        # http://127.0.0.1:5173（首页）  /promo/（界面预览）
-npm run build      # 产出 dist/（多页：dist/index.html + dist/promo/index.html）
+npm run dev        # http://127.0.0.1:5173（首页）  /promo/  /en/  /en/promo/
+npm run build      # 产出 dist/（多页：dist/index.html + dist/promo/index.html + dist/en/…）
 npm run preview    # 预览构建产物
 ```
 
 要求 Node 18+（CI 用 Node 20）。
 
+## 语言（i18n）
+
+判定顺序：**`?lang=` > 本页 `<html data-locale>` > `localStorage.anomaly-lang` > 浏览器语言**，
+浏览器语言不在支持列表里时回落到英文。切换是真实的多页面跳转（各语言有独立 HTML、独立 title 与
+`og:` 元信息），不引入任何 i18n 运行时依赖。
+
+- `index.html`、`promo/index.html` 是中文页（`data-locale="zh"`）；
+  `en/index.html`、`en/promo/index.html` 是英文页（`data-locale="en"`）。
+- 两个 `<meta>` 决定跳转行为：`site-root`（到站点根目录的相对前缀，给 `asset()` 用）与
+  `locale-switch`（另一种语言下同一页面的地址）。
+- 每份入口 `<head>` 里都内联了同一段「语言引导」脚本：首屏渲染前算出目标语言，若与本页不一致就
+  `location.replace()` 过去（保留 `hash` 与 `?theme=`，不写入历史）。脚本内联是为了不闪错语言。
+- `src/i18n.js` 负责运行时的同一套判断，`src/data/site.js` 按结果挑字典并把字段摊平导出；
+  组件只读 `site.js`，不关心语言。
+- 加一种语言：新建 `src/data/content/xx.js`（结构与 `zh-CN.js` 完全一致）、在 `src/i18n.js` 的
+  `ENTRIES` 里登记入口、加一份 `xx/index.html`（照 `en/index.html` 改 `lang` / `data-locale` /
+  `site-root` / `locale-switch`），并在 `vite.config.js` 的 `rollupOptions.input` 里加一条。
+
 ## 结构
 
 ```text
-index.html                      首页入口（含首屏前定主题的内联脚本）
-promo/index.html                界面预览页入口
-vite.config.js                  base: './' + rollupOptions.input 多页配置
+index.html                      中文首页入口（首屏前定主题 + 语言引导的内联脚本）
+promo/index.html                中文界面预览页入口
+en/index.html                   英文首页入口
+en/promo/index.html             英文界面预览页入口
+vite.config.js                  base: './' + rollupOptions.input 四页配置
 src/
-  main.js                       首页：createApp + 全局样式
+  main.js                       首页：createApp + 全局样式（中英共用）
+  i18n.js                       语言判定、偏好存储、各语言入口地址（entryHref / switchHref）
   App.vue                       首页组装
   style.css                     站点样式（深色 / 浅色两套 CSS 变量）
-  data/site.js                  文案、插件列表、FAQ、下载渠道、链接常量 —— 改内容只动这里
-  components/
-    SiteHeader.vue              导航、主题切换、阅读进度条、滚动高亮（跨页复用）
+  data/
+    links.js                    与语言无关的链接、下载渠道、静态资源路径
+    content/zh-CN.js            中文文案（首页 + 界面预览页的全部字符串）
+    content/en.js               英文文案（结构同上，两边同步加字段）
+    site.js                     按语言挑字典并摊平导出 —— 组件只认这里
+  components/                   首页组件（中英共用）
+    SiteHeader.vue              导航、语言切换、主题切换、阅读进度条、滚动高亮（跨页复用）
     HeroSection.vue             Hero 与三个下载渠道
     RiskNotice.vue              免责声明与风险提示
     FeaturesSection.vue         核心特性
@@ -44,7 +71,7 @@ src/
     FaqSection.vue              FAQ 折叠列表
     DocsSection.vue             文档入口卡片
     SiteFooter.vue              页脚、鸣谢与许可证（跨页复用）
-  promo/                        /promo/ 页面
+  promo/                        /promo/ 页面（中英共用）
     main.js                     入口：注册 v-reveal 指令
     PromoPage.vue               页面组装（壁纸 + 面纱 + 页眉页脚）
     promo.css                   宣传页样式，全部选择器前缀 .promo，避免污染站点样式
@@ -59,7 +86,7 @@ public/
   logo.png                      项目 Logo
   favicon.png                   站点图标
   .nojekyll                     跳过 Jekyll 处理（构建后随 dist 一起发布）
-  promo/img/*.webp              界面预览截图（new-* / old-* / wallpaper）
+  promo/img/*.webp              界面预览截图（new-* / old-* / wallpaper，中英共用）
   promo/anomaly-liquid-glass.mp4 演示视频
 .github/workflows/pages.yml     CI：npm ci → vite build → 部署 dist 到 Pages
 ```

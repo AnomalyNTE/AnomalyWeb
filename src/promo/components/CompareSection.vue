@@ -1,18 +1,13 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import LensTabs from './LensTabs.vue'
-import { asset } from '../../data/site.js'
+import { asset, promo } from '../../data/site.js'
 
-const tabs = [
-  { key: 'plugins', label: '插件' },
-  { key: 'diagnostics', label: '诊断' },
-  { key: 'settings', label: '设置' },
-  { key: 'developer', label: '开发者' },
-  { key: 'naiwa', label: '奶蛙主题' }
-]
+const copy = promo.compare
+const tabs = copy.tabs
 
-const active = ref('plugins') // 选中的标签
-const shown = ref('plugins') // 当前实际显示的截图
+const active = ref(tabs[0].key) // 选中的标签
+const shown = ref(active.value) // 当前实际显示的截图
 const fading = ref(false)
 const box = ref(null)
 const position = ref(50)
@@ -110,10 +105,10 @@ onBeforeUnmount(() => {
 
 <template>
   <section id="compare" class="section">
-    <h2 v-reveal>拖动，看看变化有多大。</h2>
-    <p v-reveal="{ delay: 0.05 }" class="sub">左边是旧版，右边是全新的 Liquid Glass。</p>
+    <h2 v-reveal>{{ copy.title }}</h2>
+    <p v-reveal="{ delay: 0.05 }" class="sub">{{ copy.sub }}</p>
 
-    <LensTabs v-reveal="{ delay: 0.1 }" v-model="active" :items="tabs" variant="tabs" aria-label="对比项目" />
+    <LensTabs v-reveal="{ delay: 0.1 }" v-model="active" :items="tabs" variant="tabs" :aria-label="copy.tabsAria" />
 
     <div
       ref="box"
@@ -126,10 +121,10 @@ onBeforeUnmount(() => {
       @pointerup="onPointerUp"
       @pointercancel="onPointerUp"
     >
-      <img class="c-new" :src="newSrc" alt="新版界面" />
-      <div class="c-old-wrap"><img class="c-old" :src="oldSrc" alt="旧版界面" /></div>
-      <span class="tag tag-old">旧版</span>
-      <span class="tag tag-new">新版</span>
+      <img class="c-new" :src="newSrc" :alt="copy.newAlt" />
+      <div class="c-old-wrap"><img class="c-old" :src="oldSrc" :alt="copy.oldAlt" /></div>
+      <span class="tag tag-old">{{ copy.tagOld }}</span>
+      <span class="tag tag-new">{{ copy.tagNew }}</span>
       <div class="handle"><div class="knob glass">⟷</div></div>
     </div>
   </section>

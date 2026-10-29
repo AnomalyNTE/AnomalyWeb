@@ -10,10 +10,11 @@ import InstallSection from './components/InstallSection.vue'
 import FaqSection from './components/FaqSection.vue'
 import DocsSection from './components/DocsSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
+import { ui } from './data/site.js'
 </script>
 
 <template>
-  <a class="skip" href="#main">跳到主要内容</a>
+  <a class="skip" href="#main">{{ ui.skip }}</a>
   <SiteHeader current="home" />
   <main id="main">
     <HeroSection />
