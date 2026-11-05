@@ -51,9 +51,17 @@ export const navItems = t.nav
 export const downloads = t.downloads
 /** 预告配图是静态资源，语言无关，这里补上路径 */
 export const promoTeaser = { image: promoAssets.hero, ...t.promoTeaser }
-export const features = t.features
-export const pluginsSection = t.pluginsSection
 export const plugins = t.plugins
+/** 面向用户的插件数量：文案里的 {plugins} 占位符按实际条目数替换，加插件不用改文案 */
+const userPluginCount = plugins.filter((plugin) => plugin.group === 'user').length
+export const features = {
+  ...t.features,
+  items: t.features.items.map((item) => ({
+    ...item,
+    text: item.text.replace(/\{plugins\}/g, String(userPluginCount))
+  }))
+}
+export const pluginsSection = t.pluginsSection
 export const market = t.market
 export const install = t.install
 export const faq = t.faq

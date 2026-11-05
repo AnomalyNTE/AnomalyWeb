@@ -3,8 +3,8 @@
 [Anomaly 异象](https://github.com/AnomalyNTE/Anomaly) 的项目主页 —— **Vue 3 + Vite** 静态站点，
 构建产物可直接部署到 GitHub Pages。
 
-- 首页：Hero（三个下载渠道）/ 特性 / Liquid Glass 界面预告 / 内建插件（可搜索）/ 第三方插件 /
-  快速上手 / FAQ / 文档
+- 首页：Hero（三个下载渠道）/ 特性 / Liquid Glass 界面预告 / 内建插件（可搜索，分「面向用户」与
+  「开发者模式」两组）/ 第三方插件 / 快速上手 / FAQ / 文档
 - `/promo/`：**Anomaly UI · Liquid Glass** 界面预览页（新旧对比拖动、玻璃控件试玩、细节与插件画廊、演示视频）
 - 中英双语：中文在站点根目录，英文在同构的 `/en/`、`/en/promo/`；**首次访问按浏览器语言自动跳转**，
   右上角按钮可手动切换（选择记进 `localStorage`），也支持 `?lang=zh|en` 直接指定
@@ -12,13 +12,20 @@
 - 零第三方 UI 依赖，只有一个运行时依赖 `vue`；无外部 CDN 请求
 - `base: './'`，同一份 `dist` 放在 `https://<user>.github.io/<repo>/` 或自定义域名根路径都能用
 
+> 文案来自 [Anomaly 主仓库](https://github.com/AnomalyNTE/Anomaly) 的 `README.md` 与 `docs/`：
+> 内建插件清单照 `plugins/*/manifest.json` + 各插件 `locales/` 对齐，安装、配置与排错措辞照
+> `docs/user-guide/{installation,quickstart,troubleshooting,theme}.md`。主仓库文档更新后同步这里即可，
+> 改完跑 `npm run check:content` 与 `node scripts/verify-render.mjs zh|en` 验证。
+
 ## 本地开发
 
 ```powershell
 npm install
-npm run dev        # http://127.0.0.1:5173（首页）  /promo/  /en/  /en/promo/
-npm run build      # 产出 dist/（多页：dist/index.html + dist/promo/index.html + dist/en/…）
-npm run preview    # 预览构建产物
+npm run dev            # http://127.0.0.1:5173（首页）  /promo/  /en/  /en/promo/
+npm run build          # 产出 dist/（多页：dist/index.html + dist/promo/index.html + dist/en/…）
+npm run preview        # 预览构建产物
+npm run check:content  # 校验中英字典结构一致、插件分组与命名合法
+node scripts/verify-render.mjs zh   # 用 SSR 真渲染一遍，检查中/英文案是否都在（en 同理）
 ```
 
 要求 Node 18+（CI 用 Node 20）。
@@ -65,7 +72,7 @@ src/
     RiskNotice.vue              免责声明与风险提示
     FeaturesSection.vue         核心特性
     PromoTeaser.vue             Liquid Glass 界面预告（指向 /promo/）
-    PluginsSection.vue          内建插件卡片 + 关键词搜索
+    PluginsSection.vue          内建插件卡片 + 关键词搜索（分「面向用户」/「开发者模式」两组）
     MarketSection.vue           第三方插件页面说明与安全提示
     InstallSection.vue          快速上手四步 + 目录结构 / 构建命令
     FaqSection.vue              FAQ 折叠列表
@@ -82,6 +89,9 @@ src/
       GlassDemos.vue            分段控件 / 开关 / 滑块 / 浮动标签栏试玩
       DetailsSection.vue        细节三连（悬停换图、高亮框）+ 演示视频
       GallerySection.vue        插件画廊（旧版 / 新版并排）
+scripts/
+  check-content.mjs             中英字典结构 / 插件分组校验（npm run check:content）
+  verify-render.mjs             SSR 渲染校验：node scripts/verify-render.mjs zh|en
 public/
   logo.png                      项目 Logo
   favicon.png                   站点图标

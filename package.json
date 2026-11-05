@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:content": "node scripts/check-content.mjs",
+    "check:render": "node scripts/verify-render.mjs zh && node scripts/verify-render.mjs en"
   },
   "dependencies": {
     "vue": "^3.5.13"

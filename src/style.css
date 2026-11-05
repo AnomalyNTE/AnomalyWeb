@@ -404,6 +404,14 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 .search input::placeholder { color: var(--text-mute); }
 .count { font-family: var(--mono); font-size: .8rem; color: var(--text-mute); white-space: nowrap; }
 
+.plugin-group + .plugin-group { margin-top: 1.8rem; }
+.plugin-group-title {
+  display: flex; align-items: baseline; gap: .6rem;
+  font-size: .82rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-mute); margin-bottom: .25rem;
+}
+.plugin-group-note { color: var(--text-mute); font-size: .9rem; margin: 0 0 .9rem; }
+
 .plugin-grid { align-items: start; }
 .plugin {
   background: var(--surface); border: 1px solid var(--border);
@@ -497,6 +505,9 @@ tbody td b { color: var(--text); font-weight: 600; }
 .footer-links a:hover { color: var(--accent); }
 
 .footer-bottom { padding-top: 1.2rem; display: grid; gap: .35rem; }
+.footer-credits { margin: 0; }
+.footer-credits a { color: var(--text-dim); }
+.footer-credits a:hover { color: var(--accent); }
 
 /* ---------------- Responsive ---------------- */
 

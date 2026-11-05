@@ -38,6 +38,13 @@ const year = new Date().getFullYear()
     </div>
 
     <div class="wrap footer-bottom">
+      <p class="muted small footer-credits">
+        {{ footer.credits }}
+        <template v-for="(item, index) in links.crediting" :key="item.name">
+          <a :href="item.url" target="_blank" rel="noreferrer">{{ item.name }}</a
+          ><span v-if="index < links.crediting.length - 1">{{ footer.creditSep }}</span>
+        </template>
+      </p>
       <p class="muted small">{{ copyright(year) }}</p>
     </div>
   </footer>

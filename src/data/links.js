@@ -1,6 +1,6 @@
 /**
  * 与语言无关的链接常量（各语言共用同一批 URL），供各语言字典引用。
- * 所有链接默认指向 AnomalyNTE/Anomaly 主仓库。
+ * 所有链接默认指向 AnomalyNTE/Anomaly 主仓库，路径以 docs/ 目录的当前结构为准。
  */
 
 const REPO = 'https://github.com/AnomalyNTE/Anomaly'
@@ -12,19 +12,36 @@ export const links = {
   issues: `${REPO}/issues`,
   license: `${BLOB}/LICENSE`,
   notice: `${BLOB}/NOTICE`,
+  docs: `${BLOB}/docs/README.md`,
   userGuide: `${BLOB}/docs/user-guide/README.md`,
   developerGuide: `${BLOB}/docs/developer-guide/README.md`,
   apiReference: `${BLOB}/docs/api-reference/README.md`,
-  architecture: `${BLOB}/docs/developer-guide/architecture.md`,
+  installation: `${BLOB}/docs/user-guide/installation.md`,
+  quickstart: `${BLOB}/docs/user-guide/quickstart.md`,
+  configuration: `${BLOB}/docs/user-guide/configuration.md`,
+  builtinPlugins: `${BLOB}/docs/user-guide/built-in-plugins.md`,
   thirdParty: `${BLOB}/docs/user-guide/third-party-plugins.md`,
+  theme: `${BLOB}/docs/user-guide/theme.md`,
+  diagnosticsCli: `${BLOB}/docs/user-guide/diagnostics-cli.md`,
   troubleshooting: `${BLOB}/docs/user-guide/troubleshooting.md`,
   profiles: `${BLOB}/docs/user-guide/nte-profiles.md`,
+  architecture: `${BLOB}/docs/developer-guide/architecture.md`,
+  building: `${BLOB}/docs/developer-guide/building.md`,
+  pluginDevelopment: `${BLOB}/docs/developer-guide/plugin-development.md`,
+  pluginDistribution: `${BLOB}/docs/developer-guide/plugin-distribution.md`,
+  contributing: `${BLOB}/docs/developer-guide/contributing.md`,
+  examples: `${BLOB}/examples/README.md`,
   template: 'https://github.com/AnomalyNTE/Anomaly-Plugin-Template',
   fairPlay: 'https://yh.wanmei.com/news/gamebroad/20260202/260701.html',
   crediting: [
     { name: 'Dear ImGui', url: 'https://github.com/ocornut/imgui' },
     { name: 'MinHook', url: 'https://github.com/TsudaKageyu/minhook' },
     { name: 'nlohmann/json', url: 'https://github.com/nlohmann/json' },
+    {
+      name: 'JSON schema validator',
+      url: 'https://github.com/pboettch/json-schema-validator'
+    },
+    { name: 'Noto Sans CJK', url: 'https://github.com/notofonts/noto-cjk' },
     { name: 'Dalamud', url: 'https://github.com/goatcorp/Dalamud' }
   ]
 }
