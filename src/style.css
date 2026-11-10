@@ -229,6 +229,70 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 
 .cta { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 0; }
 
+/* ---------- 首屏：赞助入口（爱发电 + Ko-fi，共用一套按钮尺寸） ---------- */
+
+.support {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .55rem .8rem; margin: 1.15rem 0 0;
+}
+.support-label { font-size: .88rem; color: var(--text-dim); }
+
+.support-links {
+  --support-btn-w: 12.6rem;
+  --support-btn-h: 2.75rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .55rem;
+}
+
+/* 两个按钮完全共用这一组几何尺寸：等宽等高、同字号同圆角。
+   爱发电不再缩放官方位图（558×156 会被拉扁或裁边），改成紫色底 + 抠出来的杯子图标 + 真文本，
+   所以既不会变形，两个按钮的盒子也严丝合缝地对齐。 */
+.support-btn,
+.support-kofi a.kofi-button {
+  box-sizing: border-box;
+  width: var(--support-btn-w) !important;
+  height: var(--support-btn-h) !important;
+  min-width: 0 !important;
+  padding: 0 .55rem !important;
+  display: inline-flex !important;
+  align-items: center; justify-content: center;
+  gap: .42rem;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit !important;
+  font-size: .93rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  box-shadow: none !important;
+  transition: filter .15s ease, transform .15s ease;
+}
+.support-btn:hover,
+.support-kofi a.kofi-button:hover { text-decoration: none !important; color: #fff !important; filter: brightness(1.07); }
+.support-btn:active,
+.support-kofi a.kofi-button:active { transform: translateY(1px); }
+
+.support-btn-afdian { background: #946ce6; }
+.support-btn-afdian img { display: block; width: auto; height: 1.15em; }
+
+/* Ko-fi Widget_2 注入结构：.btn-container → a.kofi-button → span.kofitext(img + 文本) */
+.support-kofi { display: inline-flex; align-items: center; }
+.support-kofi .btn-container { display: inline-flex !important; min-width: 0 !important; }
+.support-kofi .kofitext {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .42rem;
+  line-height: 1 !important;
+  color: #fff !important;
+}
+.support-kofi .kofitext img.kofiimg {
+  display: block !important;
+  height: 1.15em !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  animation: none !important;
+}
+
 /* ---------- 首屏：Liquid Glass 更新公告 ---------- */
 
 .announce {
@@ -521,6 +585,9 @@ tbody td b { color: var(--text); font-weight: 600; }
 @media (max-width: 560px) {
   body { font-size: 15px; }
   .cta .btn { flex: 1 1 auto; }
+  .support { gap: .5rem; }
+  .support-links { --support-btn-w: 11.4rem; --support-btn-h: 2.6rem; font-size: .9rem; }
+  .support-btn, .support-kofi a.kofi-button { font-size: .88rem !important; }
   .steps li { padding-left: 2.9rem; }
   .footer-links { gap: 1.6rem; }
 }

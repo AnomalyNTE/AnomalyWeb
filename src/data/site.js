@@ -14,7 +14,7 @@ import {
   switchHref as switchHrefOf,
   switchLabel as switchLabelOf
 } from '../i18n.js'
-import { promoAssets } from './links.js'
+import { promoAssets, support as supportLinks } from './links.js'
 import en from './content/en.js'
 import zh from './content/zh-CN.js'
 
@@ -49,6 +49,9 @@ export const meta = t.meta
 export const ui = t.ui
 export const navItems = t.nav
 export const downloads = t.downloads
+/** 赞助入口地址（爱发电 / Ko-fi）与按钮图，语言无关 */
+export const support = supportLinks
+export const supportCopy = t.hero.support
 /** 预告配图是静态资源，语言无关，这里补上路径 */
 export const promoTeaser = { image: promoAssets.hero, ...t.promoTeaser }
 export const plugins = t.plugins

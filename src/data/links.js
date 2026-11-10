@@ -61,6 +61,19 @@ export const downloadChannels = [
   }
 ]
 
+/**
+ * 赞助入口（语言无关）：爱发电 + Ko-fi 两个按钮。
+ * 爱发电原来的 200×60 位图按钮会随宽度缩放，和 Ko-fi 按钮高度对不齐，
+ * 所以只保留从官方图里抠出来的杯子图标（public/afdian-icon.png，已键控透明），
+ * 按钮本身用 CSS 重建，尺寸和 Ko-fi 共用一套变量。
+ * Widget_2.js 在入口 HTML 里同步加载，Ko-fi 按钮由 HeroSection 用 init + getHTML 渲染。
+ */
+export const support = {
+  afdian: 'https://afdian.com/a/bananachicken',
+  afdianIcon: 'afdian-icon.png',
+  kofi: 'https://ko-fi.com/bananachicken'
+}
+
 /** 首页界面预告配图（/promo/ 里其余截图仍按 key 拼路径） */
 export const promoAssets = {
   hero: 'promo/img/new-plugins.webp'

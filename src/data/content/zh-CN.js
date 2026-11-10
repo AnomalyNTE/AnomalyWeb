@@ -59,7 +59,14 @@ export default {
   hero: {
     lede: `解压 Runtime，在启动器里选中 <code>HTGame.exe</code> 所在目录即可代理安装；不想往游戏目录放代理文件时，
       也可以直接用<b>实时附加</b>把 Core 映射进游戏进程。按 <kbd>Insert</kbd> 呼出游戏内管理界面，
-      启用内建插件、浏览社区插件、查看诊断状态，一个入口全部搞定。`
+      启用内建插件、浏览社区插件、查看诊断状态，一个入口全部搞定。`,
+    support: {
+      label: '用着顺手的话，可以请我喝杯奶茶：',
+      afdian: '在爱发电赞助 Anomaly',
+      kofi: '在 Ko-fi 赞助 Anomaly',
+      afdianLabel: '在爱发电支持我',
+      kofiLabel: '在 Ko-fi 支持我'
+    }
   },
 
   promoTeaser: {

@@ -61,7 +61,14 @@ export default {
     lede: `Unzip the Runtime and point the launcher at the folder holding <code>HTGame.exe</code> to install the
       proxy entry point — or map the Core straight into a running game with <b>live attach</b> and leave the game
       folder untouched. Press <kbd>Insert</kbd> for the in-game manager, then enable built-in plugins, browse
-      community plugins and read diagnostics from one entry point.`
+      community plugins and read diagnostics from one entry point.`,
+    support: {
+      label: 'If Anomaly is useful to you, you can buy me a coffee:',
+      afdian: 'Support Anomaly on Afdian',
+      kofi: 'Support Anomaly on Ko-fi',
+      afdianLabel: 'Support me on Afdian',
+      kofiLabel: 'Support me on Ko-fi'
+    }
   },
 
   promoTeaser: {
