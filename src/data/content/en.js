@@ -73,85 +73,64 @@ export default {
     items: [
       {
         icon: '🚀',
-        title: 'Install and update',
-        text: 'Unzip the Runtime and pick the folder holding HTGame.exe on the proxy-install page, or use live attach to map the Core into a running game. Updates keep your config, logs and custom plugins.'
+        title: 'Installation and updates',
+        text: 'Extract the runtime package and attach the launcher to the game in inject mode, which writes nothing into the game directory; proxy mode is still available, and later versions update from inside the launcher.'
       },
       {
         icon: '🪟',
-        title: 'In-game manager',
-        text: 'Press Insert for a Chinese or English UI with three main tabs — Plugins, Diagnostics and Settings — plus a customizable look, palettes and background layouts.'
+        title: 'In-game management UI',
+        text: 'Press Insert to open the Chinese or English UI and manage plugin enablement, disabling, reload, and settings in one place, with customizable looks, palettes, and background layouts.'
       },
       {
         icon: '🌐',
-        title: 'Community plugin downloads',
-        text: 'Browse and install under Plugins > Available, upgrade under Updates, disable or uninstall under Installed, or add your own trusted HTTPS plugin sources.'
+        title: 'Third-party plugin downloads',
+        text: 'Browse and install community plugins under Plugins > Available, upgrade under Updates, disable or uninstall under Installed, and add trusted HTTPS plugin sources yourself.'
+      },
+      {
+        icon: '🔥',
+        title: 'Hot mod loading',
+        text: 'In hot mode, enabling, swapping, or removing a mod takes effect immediately and appearances refresh in place; resources that cannot be rebound fall back to Mod Manager world reload, and the game never restarts.'
       },
       {
         icon: '🔌',
-        title: 'Practical built-ins',
-        text: '{plugins} player-facing built-in plugins ship with the runtime — ESP, camera, summoning, automation, a status bar and character looks — all off by default; developer mode reveals the debug set.'
-      },
-      {
-        icon: '🎥',
-        title: 'Camera tools, unified',
-        text: 'Camera Tools folds view distance, FOV, forced-rotation blocking and the free camera into one camera hook, so two camera plugins no longer fight over it.'
+        title: 'Practical built-in plugins',
+        text: 'The package ships {plugins} player-facing built-in plugins covering coordinates and health, entity ESP, combat statistics, camera and blur removal, skins and model replacement, vehicles, scene switching, audio replacement, and automation — all disabled by default and enabled on demand.'
       },
       {
         icon: '🤖',
         title: 'Automation tasks',
-        text: 'Resource pickup, combat points, auto dungeons, wallet collection, the Night 999 script and AutoTaxi teleport, fight or collect on their own — and stop whenever you want.'
-      },
-      {
-        icon: '🎨',
-        title: 'Themes and backgrounds',
-        text: 'Several built-in palettes (Naiwa by default), backgrounds in center, crop or stretch mode, up to 64 stickers that may overflow the window, and an offline web editor that exports the layout JSON.'
-      },
-      {
-        icon: '🧭',
-        title: 'Status and troubleshooting',
-        text: 'Incompatible plugins, missing dependencies or an unready profile state the reason right away, with details in Diagnostics, the logs and a named-pipe diagnostics CLI.'
+        text: 'Resource Auto Pickup, Combat Resource Points, Clone Enter, WalletCollector, Night 999, AutoFish, AutoTaxi, and AutoClaw can teleport, fight, or pick up automatically, and you can stop them at any time from the plugin window.'
       },
       {
         icon: '🧩',
         title: 'Open plugin framework',
-        text: 'A pure C ABI v1 SDK with unified V1 services, so plugins never depend on the Runtime source or the C++ ABI; plugin ids are namespaced as <author>.<plugin>.'
-      },
-      {
-        icon: '🔄',
-        title: 'Full plugin lifecycle',
-        text: 'Manifests, SemVer, dependency and capability checks, package verification, file-watch hot reload and rollback on failure.'
-      },
-      {
-        icon: '🧬',
-        title: 'UE5 / NTE adaptation',
-        text: 'Verified UE5 symbol resolution plus high-level services for session, player, camera, entities, map landmarks, teleport and vehicles; features degrade gracefully when conditions are unmet.'
+        text: 'A pure C ABI v1 SDK with unified V1 services, so a plugin project needs neither the runtime source nor the C++ ABI; plugin ids follow <author>.<plugin> and never collide.'
       },
       {
         icon: '🔍',
-        title: 'Memory analysis and dev tools',
-        text: 'Inspect process modules, PE sections and memory regions, with byte-signature scanning, one-click memory dumps, the diagnostics CLI and an offline TestHost.'
+        title: 'Memory analysis and developer tools',
+        text: 'Inspect process modules, PE sections, and memory regions, with a byte signature scan, one-click memory dump, diagnostics CLI, and the offline TestHost.'
       },
-      {
-        icon: '🛡️',
-        title: 'Fault isolation',
-        text: 'A failing plugin is quarantined; when a new version fails to load it rolls back to the previous one, and the diagnostics page tells you why.'
-      }
     ]
+  },
+
+  launcherShot: {
+    image: 'launcher-en.png',
+    alt: 'Anomaly Launcher',
+    caption: 'Anomaly Launcher'
   },
 
   pluginsSection: {
     title: 'Built-in plugins',
-    sub: 'Shipped with the runtime and disabled by default. Type to filter — try "summon", "camera" or "ESP".',
+    sub: 'Shipped with the runtime package and disabled by default. Filter by keyword, for example "summon", "camera", or "ESP".',
     placeholder: 'Search built-in plugins…',
     searchAria: 'Search built-in plugins',
-    empty: 'No built-in plugin matches that. Try another keyword.',
+    empty: 'No built-in plugin matches that keyword.',
     groups: {
-      user: 'For players',
-      developer: 'Developer mode'
+      user: 'For players'
     },
     groupNotes: {
-      user: 'Installed with the runtime — enable each one under Plugins > Installed.',
-      developer: 'Debug and development plugins, listed only when developer mode is enabled for the session.'
+      user: 'Ships with the release runtime package; enable each one under Plugins > Installed.'
     }
   },
 
@@ -159,243 +138,213 @@ export default {
     {
       group: 'user',
       name: 'Coordinate Display',
-      text: 'Shows player and camera coordinates, session state and snapshot sampling metrics.',
-      tags: 'coordinate session debug sampling nteposition 坐标'
+      text: 'Player and camera coordinates, session state, and snapshot sampling metrics.',
+      tags: 'coordinates session sampling nteposition'
     },
     {
       group: 'user',
       name: 'Entity ESP',
-      text: 'Draws configurable 2D and 3D world-space bounds and labels for NTE entities.',
-      tags: 'esp entity bounds overlay entityesp 实体'
+      text: 'Configurable 2D/3D bounding boxes and labels for NTE entities.',
+      tags: 'esp entity bounds labels entityesp'
     },
     {
       group: 'user',
-      name: 'Deserted',
-      text: 'Stops crowd and traffic spawns without touching stationary NPCs.',
-      tags: 'scene crowd traffic npc deserted 场景'
+      name: 'Health Display',
+      text: 'Independent health bars with current/max HP for monsters and characters, with adjustable range, size, and text.',
+      tags: 'health bar hp healthdisplay'
     },
     {
       group: 'user',
-      name: 'Pink Paw Heist ESP',
-      text: 'Reveals loot and extraction points in the Pink Paw Heist, with value filtering, pickup controls and an entry-animation skip.',
-      tags: 'esp pink paw heist extraction bank loot 粉爪'
-    },
-    {
-      group: 'user',
-      name: 'NTE Damage Dashboard',
-      text: 'Live damage, hits and skill breakdown for the characters you control, with same-name skills merged.',
-      tags: 'damage stats dashboard crit party damagedashboard 伤害'
-    },
-    {
-      group: 'user',
-      name: 'Summon Lab',
-      text: 'Summons and manages entities by blueprint, initializing level, health and attributes during native spawning, with presets, grouped battles and advanced aggro.',
-      tags: 'summon blueprint entity battle health summonlab 召唤'
-    },
-    {
-      group: 'user',
-      name: 'Character Studio',
-      text: 'Spawns local character models with a full catalog and Chinese names, unlimited duplicates, looping idle animations, movement and removal.',
-      tags: 'character model studio idle characterstudio 角色'
-    },
-    {
-      group: 'user',
-      name: 'NPC Summon',
-      text: 'Lists the NPC classes actually running in the world, filters them by keyword, spawns one in front of you and clears the ones you spawned.',
-      tags: 'npc summon spawn npcsummon 召唤'
-    },
-    {
-      group: 'user',
-      name: 'Training Dummy',
-      text: 'Spawns training dummies through the character’s own summon path — steadier than stuffing a panel into the in-game tab wheel.',
-      tags: 'training dummy damage test trainingdummy 木桩'
-    },
-    {
-      group: 'user',
-      name: 'NaiLong',
-      text: 'Engine-native model replacement that turns you and nearby NPCs into NaiLong, restoring automatically on range exit.',
-      tags: 'model replacement costume nailong 奶龙'
-    },
-    {
-      group: 'user',
-      name: 'SkinChanger Lite',
-      text: 'Previews accessories, gliders and awakened looks, sets a custom license plate and switches the appearance of the vehicle you drive.',
-      tags: 'skin appearance accessory glider plate skinchanger 换肤'
-    },
-    {
-      group: 'user',
-      name: 'Model Scale',
-      text: 'Rescales the local character mesh by a factor without touching movement or collision.',
-      tags: 'model scale mesh modelscale 缩放'
-    },
-    {
-      group: 'user',
-      name: 'Custom UID',
-      text: 'Customizes the UID shown in the client UI, including color and animation, without touching account data.',
-      tags: 'uid interface custom fakeuid 界面'
+      name: 'NTE Combat Tracker',
+      text: 'FF14-style DPS panel: capture runs inside the plugin, rendering in a bundled standalone overlay process.',
+      tags: 'dps combat statistics damage overlay combattracker'
     },
     {
       group: 'user',
       name: 'Status Bar',
-      text: 'A status bar with frame rate, 1% low, clock, memory, and CPU/GPU load, clock, power and temperature.',
-      tags: 'status bar fps cpu gpu overlay statusbar 状态条'
-    },
-    {
-      group: 'user',
-      name: 'Camera Tools',
-      text: 'Adjusts view distance and FOV, blocks forced camera rotation, switches to a free camera and can stream the scene around it.',
-      tags: 'camera distance fov free cam cameratools 相机'
-    },
-    {
-      group: 'user',
-      name: 'Camera Blur Fix',
-      text: 'Removes camera-induced fading for the player, NPCs and crowds, including pitch-based fading and close-range hiding.',
-      tags: 'camera blur fade camerablurfix 虚化'
-    },
-    {
-      group: 'user',
-      name: 'Better Pose',
-      text: 'Adjusts animation rate, pause and root-motion scale, edits joint poses per bone, imports MMD motions and cameras, and links to a Blender rig.',
-      tags: 'animation pose mmd blender skeleton betterpose 动作'
-    },
-    {
-      group: 'user',
-      name: 'HiFi Vehicle Music',
-      text: 'Replaces in-car music with a local lossless library over exclusive or shared WASAPI, DirectSound or ASIO.',
-      tags: 'music car wasapi asio audio hifivehiclemusic 车载'
-    },
-    {
-      group: 'user',
-      name: 'Quick Ultimate',
-      text: 'Hold Alt+1 through Alt+4 to switch to that character and keep firing the ultimate; release to stop.',
-      tags: 'combo ultimate hotkey character switch quickultimate 连招'
-    },
-    {
-      group: 'user',
-      name: 'Resource Auto Pickup',
-      text: 'Reads resource tables and collects XP books, furniture, food, prison resources, wallets, shop items and similar nodes, by teleport.',
-      tags: 'resource auto pickup teleport boxauto 资源'
-    },
-    {
-      group: 'user',
-      name: 'Combat Resource Points',
-      text: 'Teleports to monster chests and Anomaly furniture material nodes, fights them, then flags and caches each locally.',
-      tags: 'resource combat chest auto combatbox 战斗'
-    },
-    {
-      group: 'user',
-      name: 'Clone Enter',
-      text: 'Enters, fights, loots and exits a dungeon per difficulty automatically, with optional looping.',
-      tags: 'dungeon auto entry reward cloneenter 副本'
-    },
-    {
-      group: 'user',
-      name: 'Auto Fish',
-      text: 'Casts, hooks and reels automatically, with continuous fishing, bait restocking and threshold selling.',
-      tags: 'fishing auto bait autofish 钓鱼'
-    },
-    {
-      group: 'user',
-      name: 'AutoTaxi',
-      text: 'Requests pickup, delivers the passenger and takes the next order automatically, showing the completions the game confirms.',
-      tags: 'taxi order auto drive autotaxi 出租车'
-    },
-    {
-      group: 'user',
-      name: 'Night 999',
-      text: 'Loops monster farming in the Night 999 Crimson Dragon Castle: camp teleport and refresh, auto combat at two fight points, repeated for the configured rounds (0 = unlimited).',
-      tags: 'night 999 spawner auto combat script night999 刷怪'
-    },
-    {
-      group: 'user',
-      name: 'Scene Loader',
-      text: 'Lists game scenes and switches through the game’s own entrances, forces a return to the big world and toggles the current scene’s data layers.',
-      tags: 'scene switch data layer sceneloader 场景'
-    },
-    {
-      group: 'user',
-      name: 'Free Fly',
-      text: 'Free flight and noclip: WASD to move, Space to rise, Ctrl to descend; the toggle hotkey is captured in the panel.',
-      tags: 'flight noclip movement explore freefly 飞行 穿墙'
-    },
-    {
-      group: 'user',
-      name: 'WalletCollector',
-      text: 'Scans wallet spawn points, plans a route for a target count and collects the wallets automatically.',
-      tags: 'wallet auto route pickup walletcollector 钱包'
+      text: 'Frame rate, 1% low, time, memory, and CPU/GPU load, clocks, power and temperature, with per-metric toggles, six screen positions, and adjustable spacing.',
+      tags: 'status bar fps cpu gpu statusbar'
     },
     {
       group: 'user',
       name: 'UI Buttons',
-      text: 'Lists in-game UI buttons as clickable, unclickable or hidden, picks the button under the cursor and fires its click event directly.',
-      tags: 'ui button click dev uibuttons 按钮'
+      text: 'Lists in-game UI buttons by clickability and clicks them through the UI service without simulating a mouse.',
+      tags: 'ui buttons click uibuttons'
+    },
+    {
+      group: 'user',
+      name: 'Camera Blur Fix',
+      text: 'Removes camera fading for the player, NPCs, and crowds, including pitch-based fading and close-range hiding.',
+      tags: 'camera blur depth camerablurfix'
+    },
+    {
+      group: 'user',
+      name: 'Camera Tools',
+      text: 'View distance and FOV adjustment, forced camera rotation blocking, free camera, and optional scene loading around it.',
+      tags: 'camera fov free camera cameratools'
+    },
+    {
+      group: 'user',
+      name: 'Model Scale',
+      text: 'Rescales the local character mesh without touching movement or collision.',
+      tags: 'model scale mesh modelscale'
+    },
+    {
+      group: 'user',
+      name: 'SkinChanger Lite',
+      text: 'Character accessories, glider, awakened appearance, custom license plates, and the current vehicle appearance.',
+      tags: 'skin appearance accessories plate skinchanger'
+    },
+    {
+      group: 'user',
+      name: 'NaiLong',
+      text: 'Engine-native model replacement for the player and nearby NPCs with 36-bone source-rig skinning, restored when out of range.',
+      tags: 'model replacement nailong'
     },
     {
       group: 'user',
       name: 'Jelly',
-      text: 'Keeps squashing and stretching characters, vehicles and dynamic models on screen, with adjustable strength, frequency, pause interval and self-rotation.',
-      tags: 'fun squash stretch model jelly 挤压'
+      text: 'Keeps characters, vehicles, and dynamic models in view squashing and stretching, with adjustable strength, frequency, rest interval, and spin.',
+      tags: 'squash stretch jelly fun'
     },
     {
-      group: 'developer',
-      name: 'Teleport',
-      text: 'Teleports the player to entered or saved world coordinates, with crosshair-direction and fixed-distance teleports plus JSON point categories.',
-      tags: 'teleport coordinates landmark dev 传送'
+      group: 'user',
+      name: 'Better Pose',
+      text: 'Animation rate, pause, and displacement scale, joint pose editing, MMD motion and camera import, and Blender skeleton linking.',
+      tags: 'pose mmd blender animation betterpose'
     },
     {
-      group: 'developer',
+      group: 'user',
+      name: 'Character Studio',
+      text: 'Spawns local character models from a complete catalog with Chinese names, unlimited duplicates, idle loops, and per-model move/destroy.',
+      tags: 'character model spawn idle characterstudio'
+    },
+    {
+      group: 'user',
+      name: 'Mod Manager',
+      text: 'Mod toggles, classification, in-place appearance refresh, and world reload that pairs with hot loading.',
+      tags: 'mod manager hot reload appearance modmanager'
+    },
+    {
+      group: 'user',
+      name: 'Custom UID',
+      text: 'Custom UID, colors, and dynamic effects on the client UI, without touching account data.',
+      tags: 'uid ui custom fakeuid'
+    },
+    {
+      group: 'user',
+      name: 'Pink Paw Heist ESP',
+      text: 'Loot and extraction points with value filters, bank loop pickup, run limits, and entry animation skip.',
+      tags: 'esp pink paw heist loot extraction pinkpaw'
+    },
+    {
+      group: 'user',
+      name: 'Quick Ultimate',
+      text: 'Hold Alt+1..4 to switch characters and keep sending Q; release to stop.',
+      tags: 'ultimate hotkey character switch quickultimate'
+    },
+    {
+      group: 'user',
+      name: 'Summon Lab',
+      text: 'Spawns monsters and playable characters with custom attributes, hostile/pet modes, group battles, and unified management.',
+      tags: 'summon blueprint entity battle summonlab'
+    },
+    {
+      group: 'user',
+      name: 'NPC Summon',
+      text: 'Lists the NPC classes actually running in the world, filters them by keyword, spawns one in front of you, and clears your own spawns.',
+      tags: 'npc summon spawn npcsummon'
+    },
+    {
+      group: 'user',
+      name: 'Training Dummy',
+      text: 'Spawns dummies through the character own summon path, driven entirely from a panel.',
+      tags: 'dummy training damage trainingdummy'
+    },
+    {
+      group: 'user',
       name: 'Vehicle Control',
-      text: 'Spawns vehicles plainly or per model, tunes performance and wheel friction, keeps durability full and reports diagnostics.',
-      tags: 'vehicle speed torque tune dev 载具'
+      text: 'Vehicle catalog, plain or customized summoning, speed/torque/wheel-friction tuning, and full durability for the current land vehicle.',
+      tags: 'vehicle car speed torque vehicle'
     },
     {
-      group: 'developer',
-      name: 'Time Accel',
-      text: 'Sets a world time-dilation multiplier with rebindable hotkeys; character damage may be off at 2x and above.',
-      tags: 'time dilation speed dev timeaccel 时间'
+      group: 'user',
+      name: 'Scene Loader',
+      text: 'Lists the game scenes and switches through the game own entrances, including in-scene entrances, world return, and data layers.',
+      tags: 'scene loader data layer sceneloader'
     },
     {
-      group: 'developer',
-      name: 'Memory Dump',
-      text: 'Dumps the live game module image in one click: raw image, a section-remapped copy and a metadata record.',
-      tags: 'memory dump image dev memorydump 转储'
+      group: 'user',
+      name: 'Deserted',
+      text: 'Stops crowd and traffic spawning without affecting stationary NPCs.',
+      tags: 'crowd traffic scene deserted'
     },
     {
-      group: 'developer',
-      name: 'DLL Loader',
-      text: 'Loads a configured native DLL from the plugin package while the game is running.',
-      tags: 'dll loader native dev dllloader 加载'
+      group: 'user',
+      name: 'HiFi Vehicle Music',
+      text: 'Replaces in-vehicle music with a local lossless library over WASAPI exclusive/shared, DirectSound, or ASIO.',
+      tags: 'music vehicle wasapi asio hifivehiclemusic'
     },
     {
-      group: 'developer',
-      name: 'Nearby Pickup',
-      text: 'Requests the framework pickup service for nearby items and displays the confirmation state.',
-      tags: 'pickup nearby items dev 拾取'
+      group: 'user',
+      name: 'Better TV',
+      text: 'Replaces the residence TV video with a local clip or a Bilibili link; memory only, no game files written.',
+      tags: 'tv video bilibili bettertv'
     },
     {
-      group: 'developer',
-      name: 'Navigation',
-      text: 'Starts and stops native NTE navigation through the host ABI.',
-      tags: 'navigation navmesh path dev 寻路'
+      group: 'user',
+      name: 'Resource Auto Pickup',
+      text: 'Reads the resource point table and picks up EXP books, gifts, furniture, food, wallets, Oracle stones, and more.',
+      tags: 'resource auto pickup boxauto pickup'
     },
     {
-      group: 'developer',
-      name: 'Movement Hold Probe',
-      text: 'Toggles the host player-hold service to exercise the character freeze and reports live gravity, velocity and movement mode.',
-      tags: 'movement freeze probe dev 移动'
+      group: 'user',
+      name: 'Combat Resource Points',
+      text: 'Visits combat chests and Anomaly furniture material points one by one, fights, then marks and caches them locally.',
+      tags: 'resource combat chest combatbox'
     },
     {
-      group: 'developer',
-      name: 'Map Spawn Exporter',
-      text: 'Reads static map spawn tables without scanning loaded actors and exports their coordinates as JSON.',
-      tags: 'map spawn export json dev 地图'
+      group: 'user',
+      name: 'Clone Enter',
+      text: 'Enters a dungeon by dungeon and difficulty, fights, claims rewards, exits, and optionally loops.',
+      tags: 'dungeon auto cloneenter'
     },
     {
-      group: 'developer',
-      name: 'Teleport Landmarks Probe',
-      text: 'Enumerates every framework teleport landmark with its ID, world and coordinates, and submits transfers directly.',
-      tags: 'landmark teleport probe dev 地标'
-    }
+      group: 'user',
+      name: 'WalletCollector',
+      text: 'Scans wallet spawn points, plans a route for the target count, and collects the wallets automatically.',
+      tags: 'wallet pickup route walletcollector'
+    },
+    {
+      group: 'user',
+      name: 'Night 999',
+      text: 'Loops enemy farming in Crimson Dragon Castle for the configured number of rounds: camp respawn plus automatic combat at two fight points.',
+      tags: 'night 999 farming script night999'
+    },
+    {
+      group: 'user',
+      name: 'AutoFish',
+      text: 'Automatic casting, hooking, and reeling with continuous fishing, bait restocking, and selling past a threshold.',
+      tags: 'fish fishing bait autofish'
+    },
+    {
+      group: 'user',
+      name: 'AutoTaxi',
+      text: 'Completes taxi orders automatically and shows the completion count the game confirms.',
+      tags: 'taxi order auto autotaxi'
+    },
+    {
+      group: 'user',
+      name: 'AutoClaw',
+      text: 'Picks a doll in the active machine, auto-submits one capture after you pay a round, and shows the game result.',
+      tags: 'claw machine doll autoclaw'
+    },
+    {
+      group: 'user',
+      name: 'Free Fly',
+      text: 'WASD flight and noclip with Space to ascend and Ctrl to descend, direction following the view; the toggle hotkey is configurable.',
+      tags: 'fly noclip movement freefly'
+    },
   ],
 
   market: {
@@ -424,15 +373,28 @@ export default {
 
   install: {
     title: 'Quick start',
-    sub: 'No build required — download the Runtime and follow four steps.',
+    sub: 'No build required — download the Runtime and follow five steps.',
     steps: [
       {
-        title: 'Download and install the Runtime',
+        title: 'Download and fully extract the Runtime',
         html: `Grab <code>Anomaly-&lt;version&gt;-runtime.zip</code> from any of ${channelLinks}.
-          <strong>Unzip the whole archive</strong> into an ordinary folder (do not pull out just the launcher) and run
-          <code>AnomalyLauncher.exe</code>. For a first install use <b>Proxy install</b>: choose the folder that
-          directly contains <code>HTGame.exe</code> and click <b>Install</b>. To leave the game folder untouched,
-          use <b>Launch &amp; attach</b> on the <b>Live attach</b> page instead.`
+          <strong>Unzip the whole archive</strong> into an ordinary folder (do not run it from inside the archive,
+          and do not pull out just <code>AnomalyLauncher.exe</code>), then run the bundled
+          <code>AnomalyLauncher.exe</code>.`
+      },
+      {
+        title: 'Confirm the two paths in the launcher',
+        html: `On the <b>Launch</b> page, confirm the two paths at the top: <b>Launcher directory</b> points at the
+          official <code>NTELauncher.exe</code> and <b>Game directory</b> at the folder that directly contains
+          <code>HTGame.exe</code>. Repick either one with the button on the right.`
+      },
+      {
+        title: 'Attach with inject mode',
+        html: `Keep the default <b>Inject mode</b> and pick the button that matches the game state: <b>Launch and attach</b>
+          when the game is not running, <b>Inject into running process</b> when it already is — neither writes anything
+          into the game directory. To put the proxy inside the game folder so a shortcut always brings Anomaly along,
+          switch to <b>Proxy mode</b> and click <b>Install</b>; the two modes are exclusive, so the inject buttons stay
+          disabled until you click <b>Disable</b>.`
       },
       {
         title: 'Launch the game and accept the notice',
@@ -441,20 +403,16 @@ export default {
           <code>Anomaly\\logs\\anomaly-runtime.log</code> and <code>Anomaly\\anomaly-platform.log</code>.`
       },
       {
-        title: 'Enable built-in plugins',
-        html: `Open <b>Plugins &gt; Installed</b>, select a plugin and enable it. Every built-in plugin starts disabled,
-          and required dependencies are enabled along with it.`
-      },
-      {
-        title: 'Install community plugins',
-        html: `Open <b>Plugins &gt; Available</b> and click <b>Install</b>, then enable it under <b>Installed</b>.
-          When a new version shows up, upgrade it under <b>Plugins &gt; Updates</b>. The installer does not fetch
-          dependencies, so install those separately.`
+        title: 'Enable built-in plugins, install community ones',
+        html: `Open <b>Plugins &gt; Installed</b>, select a built-in plugin and enable it (every one starts disabled, and
+          required dependencies are enabled along with it). Community plugins: click <b>Install</b> under
+          <b>Plugins &gt; Available</b>, enable them under <b>Installed</b>, and upgrade them under
+          <b>Plugins &gt; Updates</b>.`
       }
     ],
     directoryTitle: 'Game directory',
-    layoutTitle: 'Layout after install',
-    directoryNote: `The launcher folder does not need to be copied into the game directory; to update, unzip a newer
+    layoutTitle: 'Layout after a proxy install',
+    directoryNote: `Inject mode writes nothing into the game directory — the layout above only appears with the proxy. The launcher folder does not need to be copied into the game directory; to update, unzip a newer
       Runtime into a new folder and click <b>Update</b>. The launcher compares the SHA-256 of the old and new
       <code>Anomaly.Core.dll</code> and replaces only the Core, profiles and bundled plugins —
       <code>anomaly.ini</code>, <code>config\\</code>, <code>state\\</code>, <code>logs\\</code> and plugins you
@@ -462,7 +420,7 @@ export default {
     buildTitle: 'Build from source (developers)',
     buildNote: `<code>build.cmd</code> is a thin wrapper around the only supported build path
       (CMake presets <code>windows-vs2022</code> + <code>windows-relwithdebinfo</code>); opt into dev fixtures,
-      developer test plugins and PDBs with <code>build.cmd fixtures|testplugins|symbols</code>.`
+      developer test plugins and PDBs with <code>build.cmd fixtures|testplugins|symbols</code>.`,
   },
 
   faq: {
@@ -473,9 +431,9 @@ export default {
       {
         q: 'Insert does nothing?',
         a: `First confirm the Runtime injected: does <code>Anomaly\\logs\\anomaly-runtime.log</code> exist and record the
-          game PID? Then check the hotkey — change it in <b>Anomaly Launcher &gt; Launch settings</b>, or edit
-          <code>[Platform] ToggleKey</code> in <code>anomaly.ini</code> (a Win32 virtual-key code; the default
-          <code>45</code> is <code>VK_INSERT</code>) — and confirm <code>Enabled=1</code> and <code>Embedded=1</code>.`
+          game PID? Then check the main-window hotkey — press a key in the launcher's
+          <b>Settings &gt; Startup settings</b>, or edit <code>[Platform] ToggleKey</code> in <code>anomaly.ini</code>
+          (a Win32 virtual-key code; the default <code>45</code> is <code>VK_INSERT</code>).`
       },
       {
         q: 'The Available list is empty?',
@@ -503,10 +461,11 @@ export default {
           <a href="${links.profiles}" target="_blank" rel="noreferrer">NTE Build Profile</a>.`
       },
       {
-        q: 'Why are "Launch & attach" or "Attach to running process" greyed out?',
-        a: `They are complementary: once the page lists a running <code>HTGame.exe</code>, <b>Launch &amp; attach</b> is
-          disabled because it starts a new process. With no game running it is the other way round. A listed process
-          that cannot be attached usually differs in elevation or is not a 64-bit process.`
+        q: 'The inject mode buttons stay disabled?',
+        a: `The inject actions are disabled while the proxy is enabled: go to <b>Launch &gt; Proxy mode</b>, click
+          <b>Disable</b>, and exit the game first. <b>Launch and attach</b> only works when no <code>HTGame.exe</code>
+          is running; if the game is already running, use <b>Inject into running process</b>, which maps the core only
+          and does not restart the game.`
       },
       {
         q: 'D3D12 Present errors after enabling DLSS or frame generation?',
@@ -515,12 +474,7 @@ export default {
           <code>0</code> in <code>anomaly.ini</code>, keep <code>AttachToProcessWindow=1</code>, then restart the game
           to use the standalone window overlay backend.`
       },
-      {
-        q: 'Does it conflict with RE-UE4SS?',
-        a: `Both use <code>dwmapi.dll</code> as the proxy name, so they cannot share a directory. Anomaly is a
-          standalone entry point and does not load <code>UE4SS.dll</code>. Having both <code>dwmapi.dll</code> and
-          <code>dwmapi.dll.disabled</code> in place also counts as a conflict.`
-      },
+
       {
         q: 'Where do plugin settings and enablement live?',
         a: `Plugin JSON config is under <code>Anomaly\\config\\plugins\\</code>, global enablement in
@@ -529,10 +483,11 @@ export default {
       },
       {
         q: 'How do I remove Anomaly completely?',
-        a: `The launcher has no uninstall button yet: quit the game and the launcher, delete <code>dwmapi.dll</code>
-          (or <code>dwmapi.dll.disabled</code>) and the <code>Anomaly\\</code> folder from the game directory, then
-          delete <code>AnomalyLauncher.json</code> in the extracted folder if you want the remembered paths gone.
-          Back up settings and custom plugins first.`
+        a: `The launcher ships an uninstall action: exit the game, open <b>Launch &gt; Proxy mode</b>, click
+          <b>Uninstall</b>, then review the directory and deletion scope in the dialog and confirm. It removes
+          <code>dwmapi.dll</code> (or <code>dwmapi.dll.disabled</code>) and the entire <code>Anomaly\\</code>
+          folder in the game directory, including settings, plugins, and runtime data. Use <b>Disable</b> to stop
+          loading Anomaly temporarily; inject-mode runs write nothing there, so deleting the extracted folder is enough.`
       }
     ]
   },
@@ -591,6 +546,7 @@ export default {
     developerGuide: 'Developer guide',
     apiReference: 'API reference',
     qq: 'QQ group',
+    discord: 'Discord',
     issues: 'Issues',
     credits: 'Credits: ',
     creditSep: ', ',

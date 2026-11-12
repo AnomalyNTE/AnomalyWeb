@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue'
 import { plugins, pluginsSection } from '../data/site.js'
 
-/** 分组展示顺序：面向用户的插件在前，开发者模式调试插件在后 */
-const GROUP_ORDER = ['user', 'developer']
+/** 分组展示顺序取自字典：目前只有「面向用户」一组，加回开发者插件时在字典里补键即可 */
+const GROUP_ORDER = Object.keys(pluginsSection.groups)
 
 const query = ref('')
 
@@ -25,7 +25,7 @@ const groups = computed(() => {
       total: all.length,
       items: all.filter(matches)
     }
-  }).filter((group) => group.items.length || !tokens.length)
+  }).filter((group) => group.total > 0 && (group.items.length || !tokens.length))
 })
 
 const total = normalized.length

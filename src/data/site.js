@@ -63,6 +63,8 @@ export const features = {
   }))
 }
 export const pluginsSection = t.pluginsSection
+/** 首屏下方的启动器界面截图（图与语言相关） */
+export const launcherShot = t.launcherShot
 export const market = t.market
 export const install = t.install
 export const faq = t.faq

@@ -2,6 +2,7 @@
 import SiteHeader from './components/SiteHeader.vue'
 import HeroSection from './components/HeroSection.vue'
 import RiskNotice from './components/RiskNotice.vue'
+import LauncherShot from './components/LauncherShot.vue'
 import FeaturesSection from './components/FeaturesSection.vue'
 import PluginsSection from './components/PluginsSection.vue'
 import MarketSection from './components/MarketSection.vue'
@@ -18,6 +19,7 @@ import { ui } from './data/site.js'
   <main id="main">
     <HeroSection />
     <RiskNotice />
+    <LauncherShot />
     <FeaturesSection />
     <PluginsSection />
     <MarketSection />

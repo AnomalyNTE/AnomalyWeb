@@ -10,6 +10,7 @@ export const links = {
   repo: REPO,
   releases: `${REPO}/releases/latest`,
   issues: `${REPO}/issues`,
+  discord: 'https://discord.gg/tfeh8QQ9Vy',
   license: `${BLOB}/LICENSE`,
   notice: `${BLOB}/NOTICE`,
   docs: `${BLOB}/docs/README.md`,
@@ -41,6 +42,15 @@ export const links = {
       name: 'JSON schema validator',
       url: 'https://github.com/pboettch/json-schema-validator'
     },
+    { name: 'BLAKE3', url: 'https://github.com/BLAKE3-team/BLAKE3' },
+    { name: 'miniz', url: 'https://github.com/richgel999/miniz' },
+    { name: 'miniaudio', url: 'https://github.com/mackron/miniaudio' },
+    { name: 'RtAudio', url: 'https://github.com/thestk/rtaudio' },
+    { name: "Monkey's Audio SDK", url: 'https://www.monkeysaudio.com/' },
+    { name: 'dsd2pcm', url: 'https://github.com/GiangLH/dsd2pcm' },
+    { name: 'libarchive', url: 'https://github.com/libarchive/libarchive' },
+    { name: 'XZ Utils liblzma', url: 'https://github.com/tukaani-project/xz' },
+    { name: 'zlib', url: 'https://zlib.net/' },
     { name: 'Noto Sans CJK', url: 'https://github.com/notofonts/noto-cjk' },
     { name: 'Dalamud', url: 'https://github.com/goatcorp/Dalamud' }
   ]

@@ -73,12 +73,12 @@ export default {
       {
         icon: '🚀',
         title: '安装与更新',
-        text: '解压 Runtime，在启动器的代理安装页面选中 HTGame.exe 所在目录即可安装；也可以用实时附加直接映射进已运行的游戏。更新会保留配置、日志与自己添加的插件。'
+        text: '解压 Runtime，打开启动器用注入模式直接附加到游戏，不往游戏目录写任何文件；也保留代理模式，后续版本能在启动器里直接更新。'
       },
       {
         icon: '🪟',
         title: '游戏内管理界面',
-        text: '按 Insert 呼出中文或英文界面，Plugins / Diagnostics / Settings 三个主导航统一管理插件，界面外观、配色与背景布局都能自定义。'
+        text: '按 Insert 呼出中文或英文界面，统一管理插件的启用、停用、重载和设置，界面外观、配色与背景布局都能自定义。'
       },
       {
         icon: '🌐',
@@ -86,29 +86,19 @@ export default {
         text: '在 Plugins > 可用 中浏览安装社区插件，在 更新 中升级，在 已安装 中停用或卸载，也可以自行添加可信的 HTTPS 插件源。'
       },
       {
-        icon: '🔌',
-        title: '实用的内建插件',
-        text: '{plugins} 个面向用户的内建插件随运行包提供：ESP、相机、召唤、自动化、状态条与角色外观等，默认全部关闭；会话开发者模式还会放出调试插件。'
+        icon: '🔥',
+        title: '模组热加载',
+        text: '热加载模式下启用、替换或卸载 Mod 都即时生效，外观原地刷新；无法原地重绑的资源用 Mod 管理插件的「重新加载世界」兜底，全程不需要重启游戏。'
       },
       {
-        icon: '🎥',
-        title: '相机工具整合',
-        text: 'Camera Tools 把视距、视角 FOV、禁止强制转视角与自由相机收进同一套相机 Hook，避免多个相机插件同时启用时互相冲突。'
+        icon: '🔌',
+        title: '实用的内建插件',
+        text: '{plugins} 个面向用户的内建插件随运行包提供，覆盖坐标与血量显示、实体 ESP、战斗统计、相机与反虚化、换肤与模型替换、载具、场景切换、音频替换与各类自动化脚本，全部默认关闭、按需启用。'
       },
       {
         icon: '🤖',
         title: '自动化任务',
-        text: '资源点拾取、打怪资源点、自动副本、自动捡钱包、999 夜脚本与自动出租车可以自动传送、战斗或拾取，随时可在插件窗口里停下。'
-      },
-      {
-        icon: '🎨',
-        title: '主题与背景',
-        text: '内置多套配色（默认奶蛙），背景图支持居中、裁剪与拉伸，贴纸最多 64 张且可溢出窗口，还能用离线网页编辑器排版后导出 JSON。'
-      },
-      {
-        icon: '🧭',
-        title: '状态与排错',
-        text: '插件不兼容、依赖缺失或 Profile 未就绪时会直接显示原因，详情在 Diagnostics、日志与命名管道诊断 CLI 中查看。'
+        text: '资源点拾取、打怪资源点、自动副本、自动捡钱包、999 夜脚本、自动钓鱼、自动出租车与自动抓娃娃支持自动传送、战斗或拾取，随时可在插件窗口里停下。'
       },
       {
         icon: '🧩',
@@ -116,26 +106,17 @@ export default {
         text: '纯 C ABI v1 SDK 与统一 V1 服务，插件工程无需依赖 Runtime 源码或 C++ ABI；插件 id 统一为 <作者>.<插件名>，不会和别人的包撞名。'
       },
       {
-        icon: '🔄',
-        title: '完整插件生命周期',
-        text: 'Manifest、SemVer、依赖与 capability 校验、包校验、文件监控热重载和失败回滚。'
-      },
-      {
-        icon: '🧬',
-        title: 'UE5 / NTE 适配',
-        text: '经过校验的 UE5 符号解析，以及会话、玩家、相机、实体、地图地标、传送和载具等高层服务；条件不满足时按功能降级。'
-      },
-      {
         icon: '🔍',
         title: '内存分析与开发工具',
         text: '查看进程模块、PE 节区和内存区域，提供字节签名扫描、一键内存转储、诊断 CLI 与离线 TestHost 等开发工具。'
       },
-      {
-        icon: '🛡️',
-        title: '故障隔离',
-        text: '单个插件异常后会被隔离；新版本加载失败时自动回滚到上一代，主界面的诊断页直接给出原因。'
-      }
     ]
+  },
+
+  launcherShot: {
+    image: 'launcher-zh.png',
+    alt: 'Anomaly 启动器',
+    caption: 'Anomaly 启动器'
   },
 
   pluginsSection: {
@@ -145,12 +126,10 @@ export default {
     searchAria: '搜索内建插件',
     empty: '没有匹配的内建插件，换个关键词试试。',
     groups: {
-      user: '面向用户',
-      developer: '开发者模式'
+      user: '面向用户'
     },
     groupNotes: {
-      user: '随运行包安装，在 Plugins > 已安装 里逐个启用即可。',
-      developer: '调试与开发用插件，只在会话开发者模式启用时才出现在插件列表里。'
+      user: '随发布版运行包提供，在 Plugins > 已安装 里逐个启用即可。'
     }
   },
 
@@ -158,74 +137,92 @@ export default {
     {
       group: 'user',
       name: '坐标显示',
-      text: '显示玩家与相机坐标、会话状态与快照采样指标。',
-      tags: '坐标 会话 调试 采样 nteposition coordinate'
+      text: '显示玩家与相机坐标、会话状态和快照采样指标。',
+      tags: '坐标 会话 采样 nteposition coordinate'
     },
     {
       group: 'user',
       name: '实体边界框 ESP',
-      text: '为 NTE 实体绘制可配置的 2D／3D 世界空间边界框与标签。',
-      tags: 'esp 实体 透视 绘制 entityesp bounds'
+      text: '为 NTE 实体绘制可配置的 2D／3D 边界框与标签。',
+      tags: 'esp 实体 边界框 标签 entityesp'
     },
     {
       group: 'user',
-      name: '空无一人',
-      text: '勾选后人流与车流都不再生成，不影响站桩 NPC。',
-      tags: '场景 人流 车流 npc deserted'
+      name: '血量显示',
+      text: '独立绘制怪物与角色的血条及当前／最大生命值，可调距离、尺寸与文字。',
+      tags: '血量 血条 生命值 healthdisplay'
     },
     {
       group: 'user',
-      name: '粉爪战利品显示',
-      text: '显示粉爪大劫案的战利品与撤离点，支持价值筛选、拾取操作与入场动画跳过。',
-      tags: 'esp 粉爪 大劫案 撤离点 银行 拾取 pinkpaw'
+      name: 'NTE 战斗统计',
+      text: 'FF14 风格 DPS 面板，采集在插件内完成，呈现交给随包的独立 Overlay 进程。',
+      tags: 'dps 战斗统计 伤害 overlay combattracker'
     },
     {
       group: 'user',
-      name: 'NTE 伤害仪表盘',
-      text: '实时统计造成的伤害、命中与技能分布，同名技能合并，只统计自己操控的角色。',
-      tags: '伤害 统计 仪表盘 暴击 队伍 damagedashboard'
+      name: '状态条',
+      text: '帧率、1% 低帧率、时间、内存，以及 CPU／GPU 的占用、频率、功耗与温度；可独立开关、六个屏幕位置与间距调整。',
+      tags: '状态条 帧率 cpu gpu 监控 statusbar'
     },
     {
       group: 'user',
-      name: '召唤实验室',
-      text: '按蓝图批量召唤并管理实体，出生时就初始化等级、血量与属性，支持预设、分组对战与高级仇恨。',
-      tags: '召唤 蓝图 实体 对战 血量 summonlab'
+      name: 'UI 按钮',
+      text: '分类列出游戏内 UI 按钮，并直接调用按钮的点击事件，不模拟鼠标。',
+      tags: 'ui 按钮 点击 uibuttons'
     },
     {
       group: 'user',
-      name: '角色模型工作室',
-      text: '本地生成角色模型：完整角色目录与中文名、不限数量与重复、循环待机、移动与销毁。',
-      tags: '角色 模型 生成 待机 characterstudio'
+      name: '反虚化',
+      text: '取消角色与 NPC／人群实体的镜头虚化，同时禁用抬头与近距离镜头隐藏。',
+      tags: '相机 虚化 camerablurfix'
     },
     {
       group: 'user',
-      name: 'NPC 召唤',
-      text: '列出世界里真实运行的 NPC 类，关键词筛选后召唤到面前，也能一键清除自己生成的 NPC。',
-      tags: 'npc 召唤 生成 npcsummon'
-    },
-    {
-      group: 'user',
-      name: '木桩训练',
-      text: '通过角色自身的召唤路径生成木桩，用来测伤害与连招，比把菜单塞进游戏内轮盘更稳。',
-      tags: '木桩 测试 伤害 trainingdummy'
-    },
-    {
-      group: 'user',
-      name: '奶龙',
-      text: '用引擎原生模型替换把玩家与附近 NPC 换成奶龙，离开范围自动还原。',
-      tags: '换装 模型 奶龙 nailong'
-    },
-    {
-      group: 'user',
-      name: '换肤器 Lite',
-      text: '角色配饰、滑翔翼、觉醒外观预览与自定义车牌，还能切换当前驾驶车辆的外观。',
-      tags: '换肤 外观 配饰 滑翔翼 车牌 skinchanger'
+      name: '相机工具',
+      text: '视距与视角 FOV 调整、禁止强制转视角、自由相机，以及按自由相机位置加载场景。',
+      tags: '相机 视距 fov 自由相机 cameratools'
     },
     {
       group: 'user',
       name: '角色模型缩放',
-      text: '按倍率缩放本地角色网格，不改动移动与碰撞。',
+      text: '按倍率缩放本地角色模型，不改动移动与碰撞。',
       tags: '模型 缩放 网格 modelscale'
+    },
+    {
+      group: 'user',
+      name: '换肤器 Lite',
+      text: '角色配饰、滑翔翼、觉醒外观预览、自定义车牌，以及当前驾驶载具的外观。',
+      tags: '换肤 外观 配饰 滑翔翼 车牌 skinchanger'
+    },
+    {
+      group: 'user',
+      name: '奶龙',
+      text: '用 UE 原生模型替换玩家与附近 NPC，36 骨源蒙皮，超出距离自动还原。',
+      tags: '换装 模型 奶龙 nailong'
+    },
+    {
+      group: 'user',
+      name: '果冻',
+      text: '让镜头内的人物、载具与动态模型持续挤压拉伸，可调强度、频率、停止间隔与自转。',
+      tags: '趣味 挤压 拉伸 模型 jelly'
+    },
+    {
+      group: 'user',
+      name: '更好的动作',
+      text: '调整动作速率、暂停与位移缩放，编辑关节姿态，导入 MMD 动作与镜头，并可联动 Blender 骨架。',
+      tags: '动作 姿态 mmd blender 骨骼 betterpose'
+    },
+    {
+      group: 'user',
+      name: '角色模型工作室',
+      text: '按完整角色目录在本地生成模型，支持中文名、重复召唤、待机动作与逐个销毁。',
+      tags: '角色 模型 生成 待机 characterstudio'
+    },
+    {
+      group: 'user',
+      name: 'Mod 管理',
+      text: 'Mod 开关、分类、原地刷新外观与重新加载世界，配合热加载即时生效。',
+      tags: 'mod 热加载 管理 外观 modmanager'
     },
     {
       group: 'user',
@@ -235,27 +232,51 @@ export default {
     },
     {
       group: 'user',
-      name: '状态条',
-      text: '状态条面板：帧率、1% 低帧率、时间、内存，以及 CPU／GPU 的占用、频率、功耗与温度。',
-      tags: '状态条 帧率 cpu gpu 监控 statusbar'
+      name: '粉爪战利品显示',
+      text: '显示粉爪大劫案的战利品与撤离点，支持价值筛选、银行循环拾取、次数限制与入场动画跳过。',
+      tags: 'esp 粉爪 大劫案 撤离点 银行 拾取 pinkpaw'
     },
     {
       group: 'user',
-      name: '相机工具',
-      text: '调整视距与视角 FOV、禁止强制转视角、切换自由相机，并可让场景跟随相机加载。',
-      tags: '相机 视距 fov 自由相机 cameratools'
+      name: '快捷大招',
+      text: '按住 Alt+1 至 Alt+4 自动切换对应角色并持续发送 Q，松开即停。',
+      tags: '连招 终极 快捷键 切换角色 quickultimate'
     },
     {
       group: 'user',
-      name: '反虚化',
-      text: '取消角色与 NPC／人群的镜头虚化，包括抬头虚化和近距离人物隐藏。',
-      tags: '相机 虚化 画面 camerablurfix'
+      name: '召唤实验室',
+      text: '按蓝图或角色召唤实体，自定义属性、敌对／宠物模式、分组对战与统一管理。',
+      tags: '召唤 蓝图 实体 对战 血量 summonlab'
     },
     {
       group: 'user',
-      name: '更好的动作',
-      text: '调整玩家与角色模型的动画速率、暂停与位移缩放，逐关节编辑姿态，支持 MMD 动作与镜头、Blender 骨架联动。',
-      tags: '动作 姿态 mmd blender 骨骼 betterpose'
+      name: 'NPC 召唤',
+      text: '列出世界中真实运行的 NPC 类，关键词筛选后生成到面前，并可清除自己生成的。',
+      tags: 'npc 召唤 生成 npcsummon'
+    },
+    {
+      group: 'user',
+      name: '木桩训练',
+      text: '通过角色自身的召唤路径生成木桩，面板直接控制。',
+      tags: '木桩 训练 伤害 trainingdummy'
+    },
+    {
+      group: 'user',
+      name: '载具控制',
+      text: '浏览载具目录，普通或改装召唤，调节车速、扭矩、车轮摩擦，保持陆地载具满耐久。',
+      tags: '载具 车辆 速度 扭矩 调校 vehicle'
+    },
+    {
+      group: 'user',
+      name: '场景加载器',
+      text: '列出游戏场景并用游戏自己的入口切换，可在场景内换入口、返回大世界、开关数据层。',
+      tags: '场景 切换 数据层 大世界 sceneloader'
+    },
+    {
+      group: 'user',
+      name: '空无一人',
+      text: '阻止人流和车流生成，不影响站桩 NPC。',
+      tags: '场景 人流 车流 npc deserted'
     },
     {
       group: 'user',
@@ -265,57 +286,27 @@ export default {
     },
     {
       group: 'user',
-      name: '快捷大招',
-      text: '按住 Alt+1 至 Alt+4 切换到对应角色并持续释放极轨终结，松开即停。',
-      tags: '连招 终极 快捷键 切换角色 quickultimate'
+      name: '更好的电视',
+      text: '把住宅电视换成自定义本地视频或哔哩哔哩链接，只改内存不写游戏文件。',
+      tags: '电视 视频 bilibili bettertv'
     },
     {
       group: 'user',
       name: '资源点全自动拾取',
-      text: '读取资源点表自动拾取经验书、家具、食物、监狱资源、钱包与商店物品等资源点。',
-      tags: '资源 自动 拾取 传送 boxauto pickup'
+      text: '读资源点表自动拾取角色经验书、礼物、家具、食物、钱包、乌鸦石头等资源点。',
+      tags: '资源 自动 拾取 经验书 钱包 boxauto pickup'
     },
     {
       group: 'user',
       name: '打怪资源点',
-      text: '传送到打怪宝箱与异像家具材料点自动战斗，打完后标记并本地缓存。',
+      text: '逐个前往打怪宝箱与异像家具材料点自动战斗，完成后标记并本地缓存。',
       tags: '资源 战斗 宝箱 自动 combatbox'
     },
     {
       group: 'user',
       name: '自动副本',
-      text: '选择副本与难度后自动进本、战斗、领奖并退出，支持循环执行。',
+      text: '按副本与难度自动进本、战斗、领奖、退出，支持循环执行。',
       tags: '副本 自动 进本 领奖 cloneenter'
-    },
-    {
-      group: 'user',
-      name: '自动钓鱼',
-      text: '自动抛竿、提竿与遛鱼，支持连续钓鱼、鱼饵自动补购与按阈值卖鱼。',
-      tags: '钓鱼 自动 鱼饵 autofish fishing'
-    },
-    {
-      group: 'user',
-      name: '自动出租车',
-      text: '自动请求接客、送达并在结算后继续接单，完成数以游戏确认为准。',
-      tags: '出租车 接单 自动 taxi autotaxi'
-    },
-    {
-      group: 'user',
-      name: '999 夜脚本',
-      text: '在 999 夜赤龙古堡按设定次数循环刷怪：传送营地刷新、两个战斗点自动战斗，次数 0 为无限。',
-      tags: '999夜 刷怪 自动 战斗 脚本 night999'
-    },
-    {
-      group: 'user',
-      name: '场景加载器',
-      text: '列出游戏场景并用游戏自己的入口切换，可强制返回大世界，也能开关当前场景的数据层。',
-      tags: '场景 切换 数据层 大世界 sceneloader'
-    },
-    {
-      group: 'user',
-      name: '自由飞行',
-      text: '按住 WASD 水平飞行、空格上升、Ctrl 下降，角色可穿墙，开关快捷键可在面板里捕获保存。',
-      tags: '飞行 穿墙 移动 探索 freefly'
     },
     {
       group: 'user',
@@ -325,76 +316,34 @@ export default {
     },
     {
       group: 'user',
-      name: 'UI 按钮',
-      text: '按可点击、不可点击、隐藏分类列出游戏 UI 按钮，直接调用按钮的点击事件。',
-      tags: 'ui 按钮 点击 开发 uibuttons'
+      name: '999 夜脚本',
+      text: '在 999 夜赤龙古堡按设定次数循环刷怪：营地刷新 + 两个战斗点自动战斗，次数 0 为无限。',
+      tags: '999夜 刷怪 自动 战斗 脚本 night999'
     },
     {
       group: 'user',
-      name: '果冻',
-      text: '让镜头内的人物、载具与动态模型持续挤压拉伸，可调强度、频率、停止间隔与自转。',
-      tags: '趣味 挤压 拉伸 模型 jelly'
+      name: '自动钓鱼',
+      text: '自动抛竿、提竿与遛鱼，支持连续钓鱼、鱼饵补购及按阈值卖鱼。',
+      tags: '钓鱼 自动 鱼饵 autofish'
     },
     {
-      group: 'developer',
-      name: '传送',
-      text: '把玩家传送到输入或保存的世界坐标，支持准心方向与定距传送、JSON 点位分类管理。',
-      tags: '传送 坐标 地标 teleport dev'
+      group: 'user',
+      name: '自动出租车',
+      text: '自动接单、送达与结算后继续接单，显示游戏确认的完成数。',
+      tags: '出租车 接单 自动 taxi autotaxi'
     },
     {
-      group: 'developer',
-      name: '载具控制',
-      text: '普通与按车型召唤载具、性能调校、车轮摩擦、当前载具耐久保持满值，以及载具诊断。',
-      tags: '载具 车辆 速度 扭矩 调校 vehicle dev'
+      group: 'user',
+      name: '自动抓娃娃',
+      text: '选择当前机器内的娃娃，手动投币确认后自动抓取，并显示游戏结算结果。',
+      tags: '娃娃机 抓娃娃 自动 autoclaw'
     },
     {
-      group: 'developer',
-      name: '时间加速',
-      text: '给游戏世界设置时间膨胀倍率，界面可改键；2 倍以上角色伤害可能异常。',
-      tags: '时间 加速 倍率 timeaccel dev'
+      group: 'user',
+      name: '自由飞行',
+      text: 'WASD 飞行并穿墙，空格上升、Ctrl 下降，方向跟随视角，开关快捷键可自定义。',
+      tags: '飞行 穿墙 移动 探索 freefly'
     },
-    {
-      group: 'developer',
-      name: '内存转储',
-      text: '一键导出运行中游戏模块的完整内存映像：原始镜像、可反汇编副本与元数据。',
-      tags: '内存 转储 镜像 memorydump dev'
-    },
-    {
-      group: 'developer',
-      name: 'DLL Loader',
-      text: '在游戏运行时加载插件包内配置好的原生 DLL。',
-      tags: 'dll 加载 开发 dllloader dev'
-    },
-    {
-      group: 'developer',
-      name: '周围拾取',
-      text: '调用框架拾取服务拾取周围物品，并显示宿主确认状态。',
-      tags: '拾取 周围 pickup dev'
-    },
-    {
-      group: 'developer',
-      name: '寻路',
-      text: '通过宿主 ABI 启动或终止原生 NTE 寻路。',
-      tags: '寻路 导航 navmesh navigation dev'
-    },
-    {
-      group: 'developer',
-      name: 'Movement Hold Probe',
-      text: '切换宿主的玩家保持服务，验证角色冻结，并显示实时重力、速度与移动模式。',
-      tags: '移动 冻结 探针 movementhold dev'
-    },
-    {
-      group: 'developer',
-      name: 'Map Spawn Exporter',
-      text: '读取静态地图生成表并把坐标导出为 JSON，不扫描已加载的 actor。',
-      tags: '地图 导出 坐标 spawner dev'
-    },
-    {
-      group: 'developer',
-      name: 'Teleport Landmarks Probe',
-      text: '枚举框架提供的全部可传送地标，逐项查看 ID、所属世界与坐标并直接提交传送。',
-      tags: '地标 传送 探针 landmarks dev'
-    }
   ],
 
   market: {
@@ -421,14 +370,26 @@ export default {
 
   install: {
     title: '快速上手',
-    sub: '普通用户无需构建源码，下载 Runtime 并按下面四步走即可。',
+    sub: '普通用户无需构建源码，下载 Runtime 并按下面五步走即可。',
     steps: [
       {
-        title: '下载并安装 Runtime',
+        title: '下载并完整解压 Runtime',
         html: `从 ${channelLinks} 任选一个渠道下载
-          <code>Anomaly-&lt;版本号&gt;-runtime.zip</code>，<strong>完整解压</strong>到一个普通文件夹（不要只拿出启动器），
-          运行 <code>AnomalyLauncher.exe</code>。首次安装用<b>代理安装</b>：选择直接包含 <code>HTGame.exe</code>
-          的文件夹后点击<b>安装</b>。不想往游戏目录写代理文件时，改用<b>实时附加</b>的<b>启动并附加</b>。`
+          <code>Anomaly-&lt;版本号&gt;-runtime.zip</code>，<strong>完整解压</strong>到一个普通文件夹
+          （不要在压缩包里运行，也不要只拿出 <code>AnomalyLauncher.exe</code>），
+          然后运行其中的 <code>AnomalyLauncher.exe</code>。`
+      },
+      {
+        title: '确认启动器里的两处路径',
+        html: `打开<b>启动</b>页，确认上方的两处路径：<b>启动器目录</b>指向官方 <code>NTELauncher.exe</code>，
+          <b>游戏目录</b>指向直接包含 <code>HTGame.exe</code> 的文件夹；路径不对就点右侧按钮重选。`
+      },
+      {
+        title: '用注入模式附加到游戏',
+        html: `页面下方保持默认的<b>注入模式</b>：游戏还没开就点<b>启动并附加</b>，已经在跑就点
+          <b>注入到运行中的进程</b>——两种方式都不往游戏目录写任何文件。想把代理装进游戏目录、
+          以后从快捷方式直接带上 Anomaly 时，切到<b>代理模式</b>点<b>安装</b>；两种模式互斥，
+          代理已启用时注入按钮不可用，需先点<b>禁用</b>。`
       },
       {
         title: '启动游戏并同意须知',
@@ -437,25 +398,22 @@ export default {
           <code>Anomaly\\anomaly-platform.log</code>。`
       },
       {
-        title: '启用内建插件',
-        html: `打开 <b>Plugins &gt; 已安装</b>，选中插件后启用。内建插件默认全部关闭，带必需依赖的插件会一并启用依赖项。`
-      },
-      {
-        title: '安装社区插件',
-        html: `打开 <b>Plugins &gt; 可用</b> 点击<b>安装</b>，回到<b>已安装</b>启用；有新版本时在
-          <b>Plugins &gt; 更新</b> 中升级。安装器不会自动下载依赖，缺少时请单独安装。`
+        title: '启用内建插件、安装社区插件',
+        html: `打开 <b>Plugins &gt; 已安装</b>，选中内建插件后启用（默认全部关闭，带必需依赖的插件会一并启用依赖项）；
+          社区插件在 <b>Plugins &gt; 可用</b> 点<b>安装</b>，回<b>已安装</b>启用，有新版本时在
+          <b>Plugins &gt; 更新</b> 中升级。`
       }
     ],
     directoryTitle: '游戏目录',
-    layoutTitle: '安装后结构',
-    directoryNote: `启动器本体不需要复制进游戏目录；更新时把新版 Runtime 解压到新文件夹再点<b>更新</b>。
+    layoutTitle: '代理模式安装后的结构',
+    directoryNote: `注入模式不会往游戏目录写任何文件，上面的结构只出现在代理模式下。启动器本体不需要复制进游戏目录；更新时把新版 Runtime 解压到新文件夹再点<b>更新</b>。
       启动器会比较新旧 <code>Anomaly.Core.dll</code> 的 SHA-256，只替换 Core、Profile 与内建插件；
       <code>anomaly.ini</code>、<code>config\\</code>、<code>state\\</code>、<code>logs\\</code>
       和自己添加的插件都会保留。`,
     buildTitle: '从源码构建（开发者）',
     buildNote: `<code>build.cmd</code> 是唯一受支持构建路径（CMake Preset <code>windows-vs2022</code> +
       <code>windows-relwithdebinfo</code>）的薄包装器；开发夹具、开发者测试插件与 PDB 用
-      <code>build.cmd fixtures|testplugins|symbols</code> 按需开启。`
+      <code>build.cmd fixtures|testplugins|symbols</code> 按需开启。`,
   },
 
   faq: {
@@ -465,9 +423,9 @@ export default {
       {
         q: '按 Insert 没反应？',
         a: `先确认 Runtime 已注入：<code>Anomaly\\logs\\anomaly-runtime.log</code> 是否生成并记录了游戏 PID。
-          再确认切换键——<b>Anomaly Launcher &gt; 启动设置</b> 可改，也可编辑 <code>anomaly.ini</code> 的
-          <code>[Platform] ToggleKey</code>（Win32 虚拟键码，默认 <code>45</code> = <code>VK_INSERT</code>），
-          并确认 <code>Enabled=1</code>、<code>Embedded=1</code>。`
+          再确认主窗口快捷键——在启动器的 <b>设置 &gt; 启动设置</b> 里按键即可修改，也可编辑
+          <code>anomaly.ini</code> 的 <code>[Platform] ToggleKey</code>（Win32 虚拟键码，默认
+          <code>45</code> = <code>VK_INSERT</code>）。`
       },
       {
         q: '「可用」里没有插件？',
@@ -491,9 +449,10 @@ export default {
           细节见 <a href="${links.profiles}" target="_blank" rel="noreferrer">NTE Build Profile</a>。`
       },
       {
-        q: '「启动并附加」或「注入到运行中的进程」是灰色的？',
-        a: `两者互补：页面里已经列出正在运行的 <code>HTGame.exe</code> 时，<b>启动并附加</b>不启用（它会另起进程）；
-          游戏没在跑时反过来。若列出进程标记为不可附加，通常是权限不同或不是 x64 进程。`
+        q: '注入模式的按钮点不动？',
+        a: `代理已启用时注入按钮会禁用：先到 <b>启动 &gt; 代理模式</b> 点<b>禁用</b>并退出游戏。
+          <b>启动并附加</b>只在没有正在运行的 <code>HTGame.exe</code> 时可用；游戏已经在跑就用
+          <b>注入到运行中的进程</b>，它只挂载 Core、不重启游戏。`
       },
       {
         q: '开启 DLSS / 帧生成后出现 D3D12 Present 错误？',
@@ -501,11 +460,7 @@ export default {
           可以把 <code>anomaly.ini</code> 的 <code>[Platform] Embedded</code> 设为 <code>0</code>、
           保留 <code>AttachToProcessWindow=1</code>，退出游戏后改用独立窗口叠加后端。`
       },
-      {
-        q: '和 RE-UE4SS 冲突吗？',
-        a: `代理文件名同为 <code>dwmapi.dll</code>，两者不能共用同一目录；Anomaly 是独立入口，不加载 <code>UE4SS.dll</code>。
-          <code>dwmapi.dll</code> 与 <code>dwmapi.dll.disabled</code> 同时存在也会按冲突处理。`
-      },
+
       {
         q: '插件设置和启用状态存在哪里？',
         a: `插件自身的 JSON 设置位于 <code>Anomaly\\config\\plugins\\</code>，全局启用状态位于
@@ -514,9 +469,10 @@ export default {
       },
       {
         q: '怎么完整卸载 Anomaly？',
-        a: `启动器目前没有卸载按钮：退出游戏和启动器，删除游戏目录里的 <code>dwmapi.dll</code>
-          （或 <code>dwmapi.dll.disabled</code>）与 <code>Anomaly\\</code> 目录，需要时再删解压目录里的
-          <code>AnomalyLauncher.json</code>。删除前先备份要保留的设置与自定义插件。`
+        a: `启动器自带卸载：退出游戏，在 <b>启动 &gt; 代理模式</b> 点<b>卸载</b>，核对弹窗中的目录与删除范围后确认，
+          它会删掉游戏目录里的 <code>dwmapi.dll</code>（或 <code>dwmapi.dll.disabled</code>）与整个
+          <code>Anomaly\\</code> 目录，包括配置、插件与运行数据。只想暂时停用时点<b>禁用</b>。
+          用注入模式运行时游戏目录本来没有这些文件，删掉解压目录即可。`
       }
     ]
   },
@@ -573,6 +529,7 @@ export default {
     developerGuide: '开发者文档',
     apiReference: 'API 参考',
     qq: 'QQ 群',
+    discord: 'Discord',
     issues: '问题反馈',
     credits: '鸣谢：',
     creditSep: '、',
