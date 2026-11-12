@@ -58,37 +58,12 @@ export default {
   downloads,
 
   hero: {
-    lede: `Unzip the Runtime and point the launcher at the folder holding <code>HTGame.exe</code> to install the
-      proxy entry point — or map the Core straight into a running game with <b>live attach</b> and leave the game
-      folder untouched. Press <kbd>Insert</kbd> for the in-game manager, then enable built-in plugins, browse
-      community plugins and read diagnostics from one entry point.`,
     support: {
       label: 'If Anomaly is useful to you, you can buy me a coffee:',
       afdian: 'Support Anomaly on Afdian',
       kofi: 'Support Anomaly on Ko-fi',
       afdianLabel: 'Support me on Afdian',
       kofiLabel: 'Support me on Ko-fi'
-    }
-  },
-
-  promoTeaser: {
-    eyebrow: 'Anomaly UI · Liquid Glass',
-    title: 'Look through the glass. See your world.',
-    text: 'Real-time refraction, soft highlights, selection lenses that flow. The Liquid Glass interface rebuilt for the in-game overlay has landed in mainline and ships with the runtime since v2.6.0; the preview page still offers a side-by-side comparison and playable controls.',
-    points: [
-      'Side-by-side before/after with a draggable divider',
-      'Segmented controls, switches, sliders and a floating tab bar you can try',
-      'Backgrounds, palettes and the sticker system all kept',
-      'A glass status bar plugin ships as well since v2.6.0'
-    ],
-    cta: 'View the preview',
-    imageAlt: 'Liquid Glass plugin page',
-    sub: 'A Liquid Glass interface rebuilt for the in-game overlay.',
-    announce: {
-      badge: 'v2.6.0',
-      title: 'Anomaly UI · Liquid Glass is in mainline',
-      text: 'Real-time refraction, flowing lenses — shipping with the runtime',
-      cta: 'See the interface preview'
     }
   },
 
@@ -104,7 +79,7 @@ export default {
       {
         icon: '🪟',
         title: 'In-game manager',
-        text: 'Press Insert for a Chinese or English UI with three main tabs — Plugins, Diagnostics and Settings — plus a Liquid Glass look and customizable palettes and backgrounds layouts.'
+        text: 'Press Insert for a Chinese or English UI with three main tabs — Plugins, Diagnostics and Settings — plus a customizable look, palettes and background layouts.'
       },
       {
         icon: '🌐',
@@ -262,7 +237,7 @@ export default {
     {
       group: 'user',
       name: 'Status Bar',
-      text: 'A liquid glass status bar with frame rate, 1% low, clock, memory, and CPU/GPU load, clock, power and temperature.',
+      text: 'A status bar with frame rate, 1% low, clock, memory, and CPU/GPU load, clock, power and temperature.',
       tags: 'status bar fps cpu gpu overlay statusbar 状态条'
     },
     {

@@ -1,8 +1,5 @@
 <script setup>
-import { asset, downloads, entry, meta, promoTeaser, support, supportCopy, t } from '../data/site.js'
-
-const promoHref = entry('promo')
-const heroText = t.hero.lede
+import { asset, downloads, meta, support, supportCopy } from '../data/site.js'
 
 /**
  * Ko-fi 官方 Widget_2 内联按钮。
@@ -29,18 +26,8 @@ const kofiEmbedHtml = (() => {
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <a class="announce" :href="promoHref">
-          <span class="announce-badge">{{ promoTeaser.announce.badge }}</span>
-          <span class="announce-copy">
-            <b>{{ promoTeaser.announce.title }}</b>
-            <span>{{ promoTeaser.announce.text }}</span>
-          </span>
-          <span class="announce-cta">{{ promoTeaser.announce.cta }} →</span>
-        </a>
-
         <h1>{{ meta.name }} <span v-if="meta.cnName" class="grad">{{ meta.cnName }}</span></h1>
         <p class="tagline">{{ meta.tagline }}</p>
-        <p class="lede" v-html="heroText"></p>
 
         <div class="cta">
           <a
@@ -99,12 +86,8 @@ const kofiEmbedHtml = (() => {
         </div>
       </div>
 
-      <div class="hero-art">
-        <a class="hero-preview" :href="promoHref" :aria-label="promoTeaser.imageAlt">
-          <img :src="asset(promoTeaser.image)" :alt="promoTeaser.imageAlt" width="1180" height="680" />
-          <span class="hero-preview-tag">{{ promoTeaser.announce.badge }}</span>
-          <span class="hero-preview-cta">{{ promoTeaser.announce.cta }} →</span>
-        </a>
+      <div class="hero-art" aria-hidden="true">
+        <img :src="asset('logo.png')" alt="" width="360" height="360" />
       </div>
     </div>
   </section>

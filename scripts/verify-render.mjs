@@ -50,6 +50,18 @@ const expect = (html, needles, label) => {
   return true
 }
 
+/** 反向断言：首页不再出现液态玻璃宣传（/promo/ 预览页单独校验，保持原样） */
+const absent = (html, needles, label) => {
+  const hits = needles.filter((needle) => html.includes(needle))
+  if (hits.length) {
+    console.error(`✗ ${label} 仍包含内容：`)
+    for (const hit of hits) console.error(`  - ${hit}`)
+    return false
+  }
+  console.log(`✓ ${label}`)
+  return true
+}
+
 let ok = true
 const home = await renderPage('/src/App.vue')
 
@@ -72,7 +84,7 @@ if (locale === 'zh') {
       '首次使用须知',
       'anomaly-runtime.log',
       '第三方插件安全提示',
-      'v2.6.0',
+      '在爱发电支持我',
       '主题与背景',
       '诊断 CLI'
     ],
@@ -85,6 +97,7 @@ if (locale === 'zh') {
   } else {
     console.log('✓ 内建插件卡片 40 张（30 面向用户 + 10 开发者模式）')
   }
+  ok &&= absent(home, ['Liquid Glass', '液态玻璃'], '中文首页无液态玻璃宣传')
   const promo = await renderPage('/src/promo/PromoPage.vue')
   ok &&= expect(promo, ['v2.6.0', 'Anomaly UI · Liquid Glass', '新旧对比'], '中文界面预览页')
 } else {
@@ -104,7 +117,7 @@ if (locale === 'zh') {
       'anomaly-runtime.log',
       'themes and backgrounds',
       'diagnostics CLI',
-      'v2.6.0'
+      'Support me on Ko-fi'
     ],
     '英文首页'
   )
@@ -115,6 +128,7 @@ if (locale === 'zh') {
   } else {
     console.log('✓ 内建插件卡片 40 张（30 player-facing + 10 developer mode）')
   }
+  ok &&= absent(home, ['Liquid Glass', 'liquid glass'], '英文首页无液态玻璃宣传')
   const promo = await renderPage('/src/promo/PromoPage.vue')
   ok &&= expect(promo, ['v2.6.0', 'Anomaly UI · Liquid Glass', 'Before / after'], '英文界面预览页')
 }

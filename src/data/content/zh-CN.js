@@ -57,36 +57,12 @@ export default {
   downloads,
 
   hero: {
-    lede: `解压 Runtime，在启动器里选中 <code>HTGame.exe</code> 所在目录即可代理安装；不想往游戏目录放代理文件时，
-      也可以直接用<b>实时附加</b>把 Core 映射进游戏进程。按 <kbd>Insert</kbd> 呼出游戏内管理界面，
-      启用内建插件、浏览社区插件、查看诊断状态，一个入口全部搞定。`,
     support: {
       label: '用着顺手的话，可以请我喝杯奶茶：',
       afdian: '在爱发电赞助 Anomaly',
       kofi: '在 Ko-fi 赞助 Anomaly',
       afdianLabel: '在爱发电支持我',
       kofiLabel: '在 Ko-fi 支持我'
-    }
-  },
-
-  promoTeaser: {
-    eyebrow: 'Anomaly UI · Liquid Glass',
-    title: '透过玻璃，看见你的世界。',
-    text: '实时折射、柔和高光、会流动的选择镜片。这套为游戏内覆盖层重新打造的 Liquid Glass 界面已经进入主线，随 v2.6.0 起的运行包一起提供，界面预览页仍可逐项对比与控件试玩。',
-    points: [
-      '新旧版逐项对比，可拖动分割线',
-      '分段控件、开关、滑块、浮动标签栏都能直接试玩',
-      '背景图、配色与贴纸系统全部保留',
-      'v2.6.0 起附带同样玻璃质感的状态条插件'
-    ],
-    cta: '查看界面预览',
-    imageAlt: 'Liquid Glass 版插件页',
-    sub: '为游戏内覆盖层重新打造的一套 Liquid Glass 界面。',
-    announce: {
-      badge: 'v2.6.0',
-      title: 'Anomaly UI · Liquid Glass 已进入主线',
-      text: '实时折射、流动镜片，随运行包一起提供',
-      cta: '查看界面预览'
     }
   },
 
@@ -102,7 +78,7 @@ export default {
       {
         icon: '🪟',
         title: '游戏内管理界面',
-        text: '按 Insert 呼出中文或英文界面，Plugins / Diagnostics / Settings 三个主导航统一管理插件，Liquid Glass 外观、配色与背景布局都能自定义。'
+        text: '按 Insert 呼出中文或英文界面，Plugins / Diagnostics / Settings 三个主导航统一管理插件，界面外观、配色与背景布局都能自定义。'
       },
       {
         icon: '🌐',
@@ -260,7 +236,7 @@ export default {
     {
       group: 'user',
       name: '状态条',
-      text: '液态玻璃状态条：帧率、1% 低帧率、时间、内存，以及 CPU／GPU 的占用、频率、功耗与温度。',
+      text: '状态条面板：帧率、1% 低帧率、时间、内存，以及 CPU／GPU 的占用、频率、功耗与温度。',
       tags: '状态条 帧率 cpu gpu 监控 statusbar'
     },
     {

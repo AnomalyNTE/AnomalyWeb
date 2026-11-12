@@ -3,7 +3,7 @@
 [Anomaly 异象](https://github.com/AnomalyNTE/Anomaly) 的项目主页 —— **Vue 3 + Vite** 静态站点，
 构建产物可直接部署到 GitHub Pages。
 
-- 首页：Hero（三个下载渠道）/ 特性 / Liquid Glass 界面预告 / 内建插件（可搜索，分「面向用户」与
+- 首页：Hero（Anomaly 标志 + 三个下载渠道 + 赞助入口）/ 特性 / 内建插件（可搜索，分「面向用户」与
   「开发者模式」两组）/ 第三方插件 / 快速上手 / FAQ / 文档
 - `/promo/`：**Anomaly UI · Liquid Glass** 界面预览页（新旧对比拖动、玻璃控件试玩、细节与插件画廊、演示视频）
 - 中英双语：中文在站点根目录，英文在同构的 `/en/`、`/en/promo/`；**首次访问按浏览器语言自动跳转**，
@@ -68,10 +68,9 @@ src/
     site.js                     按语言挑字典并摊平导出 —— 组件只认这里
   components/                   首页组件（中英共用）
     SiteHeader.vue              导航、语言切换、主题切换、阅读进度条、滚动高亮（跨页复用）
-    HeroSection.vue             Hero 与三个下载渠道
+    HeroSection.vue             Hero、三个下载渠道与赞助入口
     RiskNotice.vue              免责声明与风险提示
     FeaturesSection.vue         核心特性
-    PromoTeaser.vue             Liquid Glass 界面预告（指向 /promo/）
     PluginsSection.vue          内建插件卡片 + 关键词搜索（分「面向用户」/「开发者模式」两组）
     MarketSection.vue           第三方插件页面说明与安全提示
     InstallSection.vue          快速上手四步 + 目录结构 / 构建命令

@@ -73,8 +73,3 @@ export const support = {
   afdianIcon: 'afdian-icon.png',
   kofi: 'https://ko-fi.com/bananachicken'
 }
-
-/** 首页界面预告配图（/promo/ 里其余截图仍按 key 拼路径） */
-export const promoAssets = {
-  hero: 'promo/img/new-plugins.webp'
-}

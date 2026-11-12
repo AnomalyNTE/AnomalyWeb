@@ -203,7 +203,7 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 
 /* ---------------- Hero ---------------- */
 
-.hero { position: relative; overflow: hidden; padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem); }
+.hero { position: relative; overflow: hidden; padding: clamp(2rem, 4.5vw, 3.25rem) 0 clamp(1.5rem, 3vw, 2rem); }
 
 .hero-glow {
   position: absolute; inset: -40% 20% auto -10%; height: 620px;
@@ -213,27 +213,33 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
   filter: blur(10px); pointer-events: none;
 }
 
+/* 两列按内容宽度排布并整体居中：左列不再吃掉 2/3 的容器宽，
+   文字块右侧到标志之间的空白随视口自适应，但不会再空出一大块。 */
 .hero-inner {
   position: relative;
-  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
-  gap: 2.5rem; align-items: center;
+  display: grid; grid-template-columns: minmax(0, auto) minmax(0, auto);
+  justify-content: center;
+  gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center;
 }
+
+.hero-text { max-width: 34rem; }
 
 .grad {
   background: linear-gradient(100deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-.tagline { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--text); font-weight: 550; margin-bottom: .8rem; }
-.lede { color: var(--text-dim); max-width: 58ch; font-size: 1.02rem; }
+.tagline { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--text); font-weight: 550; margin-bottom: .55rem; }
 
-.cta { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 0; }
+.cta { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.05rem 0 0; }
 
 /* ---------- 首屏：赞助入口（爱发电 + Ko-fi，共用一套按钮尺寸） ---------- */
 
+/* 说明文字和按钮各占一行：宽屏下也不会把「请我喝杯奶茶」和两个按钮挤成一条长行，
+   窄屏时按钮组内部再按 flex-wrap 自己折行。 */
 .support {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: .55rem .8rem; margin: 1.15rem 0 0;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: .5rem; margin: .85rem 0 0;
 }
 .support-label { font-size: .88rem; color: var(--text-dim); }
 
@@ -293,108 +299,21 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
   animation: none !important;
 }
 
-/* ---------- 首屏：Liquid Glass 更新公告 ---------- */
-
-.announce {
-  display: inline-flex; align-items: center; gap: .6rem;
-  max-width: 100%; margin-bottom: 1.15rem;
-  padding: .38rem .55rem .38rem .42rem;
-  border: 1px solid transparent; border-radius: 999px;
-  background:
-    linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
-    linear-gradient(100deg, var(--accent), var(--accent-2)) border-box;
-  color: var(--text);
-  box-shadow: 0 16px 36px -24px color-mix(in srgb, var(--accent) 85%, transparent);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-.announce:hover {
-  text-decoration: none;
-  transform: translateY(-1px);
-  box-shadow: 0 20px 42px -22px color-mix(in srgb, var(--accent) 95%, transparent);
-}
-.announce-badge {
-  flex: none;
-  font-family: var(--mono); font-size: .68rem; font-weight: 700; letter-spacing: .1em;
-  color: var(--accent-ink);
-  background: linear-gradient(100deg, var(--accent), var(--accent-2));
-  padding: .22rem .5rem; border-radius: 999px;
-}
-.announce-copy { display: flex; flex-direction: column; text-align: left; line-height: 1.32; min-width: 0; }
-.announce-copy b { font-size: .88rem; font-weight: 600; }
-.announce-copy span { font-size: .76rem; color: var(--text-mute); }
-.announce-cta {
-  flex: none; padding-right: .5rem;
-  font-size: .8rem; font-weight: 600; color: var(--accent); white-space: nowrap;
-}
-
-/* ---------- 首屏主视觉：新界面预览 ---------- */
+/* ---------- 首屏主视觉：Anomaly 标志 ---------- */
 
 .hero-art { display: grid; place-items: center; }
-
-.hero-preview {
-  position: relative; display: block; width: 100%;
-  border-radius: 18px; overflow: hidden;
-  border: 1px solid var(--border-strong);
-  box-shadow:
-    0 34px 80px -40px rgba(0, 0, 0, .8),
-    0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+.hero-art img {
+  width: 100%; max-width: 400px; border-radius: 24px;
+  filter: drop-shadow(0 30px 60px rgba(53, 224, 230, .18));
+  animation: float 9s ease-in-out infinite;
 }
-.hero-preview img { display: block; width: 100%; height: auto; }
-.hero-preview:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong));
-  box-shadow:
-    0 40px 90px -38px rgba(0, 0, 0, .85),
-    0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent),
-    0 0 44px -12px color-mix(in srgb, var(--accent) 55%, transparent);
+@keyframes float {
+  0%, 100% { transform: translateY(-6px) rotate(-1deg); }
+  50% { transform: translateY(6px) rotate(1deg); }
 }
-.hero-preview-tag {
-  position: absolute; top: 10px; left: 10px;
-  font-family: var(--mono); font-size: .64rem; font-weight: 700; letter-spacing: .1em;
-  color: var(--accent-ink);
-  background: linear-gradient(100deg, var(--accent), var(--accent-2));
-  padding: .2rem .45rem; border-radius: 999px;
-}
-.hero-preview-cta {
-  position: absolute; right: 10px; bottom: 10px;
-  font-size: .76rem; font-weight: 600; color: var(--text);
-  background: color-mix(in srgb, var(--bg) 72%, transparent);
-  border: 1px solid var(--border-strong); border-radius: 999px;
-  padding: .28rem .6rem;
-  backdrop-filter: blur(8px);
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-preview, .announce { transition: none; }
-}
-
-/* ---------------- 界面预览预告（/promo） ---------------- */
-
-.teaser {
-  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-  gap: 2rem; align-items: center;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.4rem;
-  box-shadow: var(--shadow);
-}
-.teaser-art {
-  display: block; border-radius: var(--radius-sm); overflow: hidden;
-  border: 1px solid var(--border); line-height: 0;
-}
-.teaser-art img { width: 100%; transition: transform .4s ease; }
-.teaser-art:hover img { transform: scale(1.02); }
-.teaser-text h3 { font-size: 1.28rem; margin-bottom: .5rem; }
-.teaser-text p { color: var(--text-dim); font-size: .96rem; }
-.teaser-list {
-  margin: .2rem 0 1.2rem; padding-left: 1.1rem;
-  color: var(--text-dim); font-size: .92rem;
-  display: grid; gap: .3rem;
-}
-
-@media (max-width: 860px) {
-  .teaser { grid-template-columns: 1fr; gap: 1.2rem; }
+  .hero-art img { animation: none; }
 }
 
 /* ---------------- Sections ---------------- */
@@ -435,7 +354,7 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: .35rem .5rem;
-  margin: 1.5rem 0;
+  margin: 1.15rem 0;
   background: var(--surface);
 }
 .notice > summary {
@@ -577,6 +496,8 @@ tbody td b { color: var(--text); font-weight: 600; }
 
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; gap: 1.6rem; }
+  .hero-art { order: -1; }
+  .hero-art img { max-width: 200px; }
   .nav { display: none; }
   .topbar-inner { justify-content: space-between; }
   .topbar-actions { margin-left: auto; }
