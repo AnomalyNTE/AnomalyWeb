@@ -14,7 +14,7 @@ import {
   switchHref as switchHrefOf,
   switchLabel as switchLabelOf
 } from '../i18n.js'
-import { support as supportLinks } from './links.js'
+import { links, support as supportLinks } from './links.js'
 import en from './content/en.js'
 import zh from './content/zh-CN.js'
 
@@ -24,7 +24,7 @@ export const DICTIONARIES = { zh, en }
 export const t = DICTIONARIES[locale] || DICTIONARIES.en
 
 /** 与语言无关的链接常量（仍从这里转出，组件不必关心数据是怎么组织的） */
-export { links } from './links.js'
+export { links }
 export { locale, pageRoot }
 
 /** 引用 public/ 下的资源：asset('logo.png')、asset('promo/img/new-plugins.webp') */

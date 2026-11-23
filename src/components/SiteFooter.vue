@@ -31,8 +31,6 @@ const year = new Date().getFullYear()
         </div>
         <div>
           <h4>{{ footer.community }}</h4>
-          <span class="muted small">{{ footer.qq }} {{ meta.qq }}</span>
-          <a :href="links.discord" target="_blank" rel="noreferrer">{{ footer.discord }}</a>
           <a :href="links.issues" target="_blank" rel="noreferrer">{{ footer.issues }}</a>
         </div>
       </div>

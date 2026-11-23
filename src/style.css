@@ -16,6 +16,8 @@
   --accent: #35e0e6;
   --accent-2: #ff3ea5;
   --accent-ink: #04161a;
+  /* Discord 品牌色：只给顶栏入口按钮用 */
+  --discord: #5865f2;
   --warn-bg: rgba(255, 196, 0, .08);
   --warn-border: rgba(255, 196, 0, .35);
   --caution-bg: rgba(255, 62, 165, .07);
@@ -41,6 +43,8 @@ html[data-theme="light"] {
   --accent: #0aa8b0;
   --accent-2: #d81f80;
   --accent-ink: #ffffff;
+  /* 浅色主题压深一档，保证按钮白字对比度 */
+  --discord: #4752e0;
   --warn-bg: #fff8e5;
   --warn-border: #f0d79a;
   --caution-bg: #fff2f7;
@@ -200,6 +204,28 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 
 .btn-ghost { background: transparent; }
 .btn-sm { padding: .42rem .8rem; font-size: .85rem; }
+
+/* ---------- 顶栏入口按钮：Discord 与 GitHub 同高同内边距，只有配色不同 ---------- */
+
+.topbar-actions .btn {
+  height: 34px; padding: 0 .8rem;
+  font-size: .85rem; font-weight: 600; line-height: 1;
+}
+.topbar-actions .btn .icon-discord { width: 15px; height: 15px; }
+
+.btn-discord {
+  background: var(--discord);
+  border-color: var(--discord);
+  color: #fff;
+}
+.btn-discord:hover {
+  background: color-mix(in srgb, var(--discord) 84%, #fff);
+  border-color: var(--discord);
+  color: #fff;
+}
+.btn-discord:active { transform: translateY(1px); }
+
+.icon-discord { flex: none; display: block; }
 
 /* ---------------- Hero ---------------- */
 
@@ -395,15 +421,22 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 }
 .plugin-group-note { color: var(--text-mute); font-size: .9rem; margin: 0 0 .9rem; }
 
-.plugin-grid { align-items: start; }
+/* 卡片尺寸统一：整块网格共用同一行高，文案最多三行，正文长短不再把卡片撑成参差的砖块 */
+.plugin-grid { grid-auto-rows: 1fr; }
 .plugin {
+  display: flex; flex-direction: column;
+  height: 100%;
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-sm); padding: 1rem 1.1rem;
   transition: border-color .18s, background .18s;
 }
 .plugin:hover { border-color: var(--border-strong); background: var(--surface-2); }
 .plugin h3 { font-size: .98rem; margin-bottom: .3rem; }
-.plugin p { color: var(--text-dim); font-size: .9rem; margin: 0; }
+.plugin p {
+  color: var(--text-dim); font-size: .9rem; margin: 0;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 
 .grid-empty { color: var(--text-mute); font-size: .92rem; padding: 1rem 0; }
 
@@ -515,9 +548,15 @@ tbody td b { color: var(--text); font-weight: 600; }
 @media (max-width: 560px) {
   body { font-size: 15px; }
   .cta .btn { flex: 1 1 auto; }
+  /* 顶栏放不下「图标 + Discord」四个控件时只留图标，标题栏不折行 */
+  .btn-discord-text { display: none; }
+  .btn-discord { padding-inline: .52rem; }
   .support { gap: .5rem; }
   .support-links { --support-btn-w: 11.4rem; --support-btn-h: 2.6rem; font-size: .9rem; }
   .support-btn, .support-kofi a.kofi-button { font-size: .88rem !important; }
+  /* 单列时按内容自由撑高：三行截断会把长说明吃掉，这里放开 */
+  .plugin-grid { grid-auto-rows: auto; }
+  .plugin p { display: block; -webkit-line-clamp: unset; overflow: visible; }
   .steps li { padding-left: 2.9rem; }
   .footer-links { gap: 1.6rem; }
 }

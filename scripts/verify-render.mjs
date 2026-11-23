@@ -71,12 +71,16 @@ if (locale === 'zh') {
     [
       'grad">异象',
       '内建插件',
-      '35 个面向用户的内建插件',
+      '40 个面向用户的内建插件',
       '面向用户',
+      '更好的地图',
       '召唤实验室',
-      '自动出租车',
       '状态条',
-      '999 夜脚本',
+      '空幕管理',
+      '随身商店',
+      '鬼屋一键完成主线',
+      '自动出租车',
+      '999夜脚本',
       '传送',
       '载具控制',
       '注入模式',
@@ -90,11 +94,11 @@ if (locale === 'zh') {
     '中文首页'
   )
   const cards = (home.match(/class="plugin"/g) ?? []).length
-  if (cards !== 35) {
-    console.error(`✗ 内建插件卡片数 ${cards} ≠ 35`)
+  if (cards !== 40) {
+    console.error(`✗ 内建插件卡片数 ${cards} ≠ 40`)
     ok = false
   } else {
-    console.log('✓ 内建插件卡片 35 张（面向用户）')
+    console.log('✓ 内建插件卡片 40 张（面向用户）')
   }
   ok &&= absent(home, ['Liquid Glass', '液态玻璃'], '中文首页无液态玻璃宣传')
   const promo = await renderPage('/src/promo/PromoPage.vue')
@@ -106,8 +110,12 @@ if (locale === 'zh') {
       'Summon Lab',
       'AutoTaxi',
       'Status Bar',
-      '35 player-facing built-in plugins',
+      '40 player-facing built-in plugins',
       'Night 999',
+      'Haunted House',
+      'Better Map',
+      'Remote Shop',
+      'Equipment Manager',
       'For players',
       'Vehicle Control',
       'inject mode',
@@ -120,11 +128,11 @@ if (locale === 'zh') {
     '英文首页'
   )
   const cards = (home.match(/class="plugin"/g) ?? []).length
-  if (cards !== 35) {
-    console.error(`✗ 内建插件卡片数 ${cards} ≠ 35`)
+  if (cards !== 40) {
+    console.error(`✗ 内建插件卡片数 ${cards} ≠ 40`)
     ok = false
   } else {
-    console.log('✓ 内建插件卡片 35 张（player-facing）')
+    console.log('✓ 内建插件卡片 40 张（player-facing）')
   }
   ok &&= absent(home, ['Liquid Glass', 'liquid glass'], '英文首页无液态玻璃宣传')
   const promo = await renderPage('/src/promo/PromoPage.vue')

@@ -1,5 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import IconDiscord from './IconDiscord.vue'
 import {
   asset,
   links,
@@ -138,6 +139,17 @@ onBeforeUnmount(() => {
         >
           ◐
         </button>
+        <a
+          class="btn btn-discord btn-sm"
+          :href="links.discord"
+          target="_blank"
+          rel="noreferrer"
+          :title="ui.discordTitle"
+          :aria-label="ui.discordTitle"
+        >
+          <IconDiscord :size="15" />
+          <span class="btn-discord-text">{{ ui.discordLabel }}</span>
+        </a>
         <a class="btn btn-ghost btn-sm" :href="links.repo" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </div>

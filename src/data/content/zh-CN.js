@@ -32,7 +32,6 @@ export default {
     name: 'Anomaly',
     cnName: '异象',
     tagline: '稳定、灵活、开放的《异环》插件平台',
-    qq: '1037114140',
     license: 'AGPL-3.0-only'
   },
 
@@ -41,7 +40,10 @@ export default {
     navAria: '主导航',
     themeTitle: '切换主题',
     themeToDark: '切换到深色主题',
-    themeToLight: '切换到浅色主题'
+    themeToLight: '切换到浅色主题',
+    /** 顶栏 Discord 按钮的文字与提示 */
+    discordLabel: 'Discord',
+    discordTitle: '加入 Anomaly Discord 社区'
   },
 
   nav: [
@@ -93,12 +95,12 @@ export default {
       {
         icon: '🔌',
         title: '实用的内建插件',
-        text: '{plugins} 个面向用户的内建插件随运行包提供，覆盖坐标与血量显示、实体 ESP、战斗统计、相机与反虚化、换肤与模型替换、载具、场景切换、音频替换与各类自动化脚本，全部默认关闭、按需启用。'
+        text: '{plugins} 个面向用户的内建插件随运行包提供，覆盖坐标与血量显示、地图标点、实体 ESP、战斗统计、空幕管理与随身商店、相机与帧率解锁、换肤与模型替换、载具、场景切换、音频替换与各类自动化脚本，全部默认关闭、按需启用。'
       },
       {
         icon: '🤖',
         title: '自动化任务',
-        text: '资源点拾取、打怪资源点、自动副本、自动捡钱包、999 夜脚本、自动钓鱼、自动出租车与自动抓娃娃支持自动传送、战斗或拾取，随时可在插件窗口里停下。'
+        text: '资源点拾取、打怪资源点、自动副本、自动捡钱包、999夜脚本、鬼屋一键完成主线、自动钓鱼、自动出租车与自动抓娃娃支持自动传送、战斗或拾取，随时可在插件窗口里停下。'
       },
       {
         icon: '🧩',
@@ -142,6 +144,12 @@ export default {
     },
     {
       group: 'user',
+      name: '更好的地图',
+      text: '在游戏大地图上显示谕石、21 的赠礼、敌影清剿与城市违规行径点位，支持怪物筛选、隐藏已完成与点击传送。',
+      tags: '地图 标点 谕石 传送 bettermap map'
+    },
+    {
+      group: 'user',
       name: '实体边界框 ESP',
       text: '为 NTE 实体绘制可配置的 2D／3D 边界框与标签。',
       tags: 'esp 实体 边界框 标签 entityesp'
@@ -169,6 +177,12 @@ export default {
       name: 'UI 按钮',
       text: '分类列出游戏内 UI 按钮，并直接调用按钮的点击事件，不模拟鼠标。',
       tags: 'ui 按钮 点击 uibuttons'
+    },
+    {
+      group: 'user',
+      name: '帧率解锁',
+      text: '解除 UE 帧率上限并记住开关状态，关闭时恢复原上限。',
+      tags: '帧率 fps 解锁 上限 fpsunlocker'
     },
     {
       group: 'user',
@@ -215,7 +229,7 @@ export default {
     {
       group: 'user',
       name: '角色模型工作室',
-      text: '按完整角色目录在本地生成模型，支持中文名、重复召唤、待机动作与逐个销毁。',
+      text: '按完整角色目录在本地生成模型，名称跟随游戏语言，支持重复召唤、待机动作与逐个销毁。',
       tags: '角色 模型 生成 待机 characterstudio'
     },
     {
@@ -292,6 +306,18 @@ export default {
     },
     {
       group: 'user',
+      name: '空幕管理',
+      text: '在本机网页中同步实时装备库存，支持装卸转移、单人／多人配装计算、方案库、单件鉴定、倒带与养成规划。',
+      tags: '空幕 装备 配装 鉴定 倒带 equipmentmanager'
+    },
+    {
+      group: 'user',
+      name: '随身商店',
+      text: '按商家浏览、搜索与收藏商品，选择分店并按自定数量批量购买。',
+      tags: '商店 商家 购买 收藏 remoteshop'
+    },
+    {
+      group: 'user',
       name: '资源点全自动拾取',
       text: '读资源点表自动拾取角色经验书、礼物、家具、食物、钱包、乌鸦石头等资源点。',
       tags: '资源 自动 拾取 经验书 钱包 boxauto pickup'
@@ -316,9 +342,15 @@ export default {
     },
     {
       group: 'user',
-      name: '999 夜脚本',
+      name: '999夜脚本',
       text: '在 999 夜赤龙古堡按设定次数循环刷怪：营地刷新 + 两个战斗点自动战斗，次数 0 为无限。',
       tags: '999夜 刷怪 自动 战斗 脚本 night999'
+    },
+    {
+      group: 'user',
+      name: '鬼屋一键完成主线',
+      text: '鬼屋活动主线 18 步一键完成与直达 BOSS 房，支持扫描并自动拾取宣传单、电池、理智喷雾与噗仔小客。',
+      tags: '鬼屋 主线 boss 电池 宣传单 hauntedhouse'
     },
     {
       group: 'user',
@@ -528,8 +560,6 @@ export default {
     userGuide: '用户文档',
     developerGuide: '开发者文档',
     apiReference: 'API 参考',
-    qq: 'QQ 群',
-    discord: 'Discord',
     issues: '问题反馈',
     credits: '鸣谢：',
     creditSep: '、',

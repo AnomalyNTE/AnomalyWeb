@@ -61,7 +61,7 @@ const shown = computed(() => groups.value.reduce((sum, group) => sum + group.ite
       <div class="grid grid-3 plugin-grid">
         <article v-for="plugin in group.items" :key="plugin.name" class="plugin">
           <h3>{{ plugin.name }}</h3>
-          <p>{{ plugin.text }}</p>
+          <p :title="plugin.text">{{ plugin.text }}</p>
         </article>
       </div>
     </div>

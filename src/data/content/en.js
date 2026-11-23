@@ -33,7 +33,6 @@ export default {
     name: 'Anomaly',
     cnName: '',
     tagline: 'A stable, flexible and open plugin platform for Neverness To Everness',
-    qq: '1037114140',
     license: 'AGPL-3.0-only'
   },
 
@@ -42,7 +41,10 @@ export default {
     navAria: 'Main navigation',
     themeTitle: 'Toggle theme',
     themeToDark: 'Switch to the dark theme',
-    themeToLight: 'Switch to the light theme'
+    themeToLight: 'Switch to the light theme',
+    /** Header Discord button label and tooltip */
+    discordLabel: 'Discord',
+    discordTitle: 'Join the Anomaly Discord community'
   },
 
   nav: [
@@ -94,12 +96,12 @@ export default {
       {
         icon: '🔌',
         title: 'Practical built-in plugins',
-        text: 'The package ships {plugins} player-facing built-in plugins covering coordinates and health, entity ESP, combat statistics, camera and blur removal, skins and model replacement, vehicles, scene switching, audio replacement, and automation — all disabled by default and enabled on demand.'
+        text: 'The package ships {plugins} player-facing built-in plugins covering coordinates and health, world map markers, entity ESP, combat statistics, equipment management and remote shopping, camera and FPS unlocking, skins and model replacement, vehicles, scene switching, audio replacement, and automation — all disabled by default and enabled on demand.'
       },
       {
         icon: '🤖',
         title: 'Automation tasks',
-        text: 'Resource Auto Pickup, Combat Resource Points, Clone Enter, WalletCollector, Night 999, AutoFish, AutoTaxi, and AutoClaw can teleport, fight, or pick up automatically, and you can stop them at any time from the plugin window.'
+        text: 'Resource Auto Pickup, Combat Resource Points, Clone Enter, WalletCollector, Night 999, Haunted House, AutoFish, AutoTaxi, and AutoClaw can teleport, fight, or pick up automatically, and you can stop them at any time from the plugin window.'
       },
       {
         icon: '🧩',
@@ -143,6 +145,12 @@ export default {
     },
     {
       group: 'user',
+      name: 'Better Map',
+      text: "Marks Oracle Stones, Twenty-One's Gifts, enemy spawn points, and city crime locations on the world map, with monster filters, hide-completed, and click-to-teleport.",
+      tags: 'map markers teleport oracle bettermap'
+    },
+    {
+      group: 'user',
       name: 'Entity ESP',
       text: 'Configurable 2D/3D bounding boxes and labels for NTE entities.',
       tags: 'esp entity bounds labels entityesp'
@@ -170,6 +178,12 @@ export default {
       name: 'UI Buttons',
       text: 'Lists in-game UI buttons by clickability and clicks them through the UI service without simulating a mouse.',
       tags: 'ui buttons click uibuttons'
+    },
+    {
+      group: 'user',
+      name: 'FPS Unlocker',
+      text: 'Removes the UE frame rate cap, remembers the toggle, and restores the original cap when switched off.',
+      tags: 'fps frame rate unlock cap fpsunlocker'
     },
     {
       group: 'user',
@@ -216,7 +230,7 @@ export default {
     {
       group: 'user',
       name: 'Character Studio',
-      text: 'Spawns local character models from a complete catalog with Chinese names, unlimited duplicates, idle loops, and per-model move/destroy.',
+      text: 'Spawns local character models from a complete catalog with names in the game language, unlimited duplicates, idle loops, and per-model move/destroy.',
       tags: 'character model spawn idle characterstudio'
     },
     {
@@ -293,6 +307,18 @@ export default {
     },
     {
       group: 'user',
+      name: 'Equipment Manager',
+      text: 'Local web UI synced with live inventory for equipping, transfers, single/multi-character loadout optimization, presets, item appraisal, rewind, and build planning.',
+      tags: 'equipment inventory loadout appraisal equipmentmanager'
+    },
+    {
+      group: 'user',
+      name: 'Remote Shop',
+      text: 'Browse merchants, search and favorite products, choose a branch, and batch-buy custom quantities.',
+      tags: 'shop merchant purchase favorite remoteshop'
+    },
+    {
+      group: 'user',
       name: 'Resource Auto Pickup',
       text: 'Reads the resource point table and picks up EXP books, gifts, furniture, food, wallets, Oracle stones, and more.',
       tags: 'resource auto pickup boxauto pickup'
@@ -320,6 +346,12 @@ export default {
       name: 'Night 999',
       text: 'Loops enemy farming in Crimson Dragon Castle for the configured number of rounds: camp respawn plus automatic combat at two fight points.',
       tags: 'night 999 farming script night999'
+    },
+    {
+      group: 'user',
+      name: 'Haunted House',
+      text: 'One-click 18-step haunted-house main flow and boss-room shortcut, plus on-demand scans and auto-pickup for flyers, batteries, sanity spray, and gingerbread.',
+      tags: 'haunted house main story boss hauntedhouse'
     },
     {
       group: 'user',
@@ -545,8 +577,6 @@ export default {
     userGuide: 'User guide',
     developerGuide: 'Developer guide',
     apiReference: 'API reference',
-    qq: 'QQ group',
-    discord: 'Discord',
     issues: 'Issues',
     credits: 'Credits: ',
     creditSep: ', ',
