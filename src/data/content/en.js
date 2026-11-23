@@ -577,9 +577,8 @@ export default {
     userGuide: 'User guide',
     developerGuide: 'Developer guide',
     apiReference: 'API reference',
+    discord: 'Discord',
     issues: 'Issues',
-    credits: 'Credits: ',
-    creditSep: ', ',
     copyright: '© {year} AnomalyNTE · Distributed under the GNU Affero General Public License v3.0 ({license}).'
   },
 

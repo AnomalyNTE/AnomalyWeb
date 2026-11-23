@@ -33,27 +33,7 @@ export const links = {
   contributing: `${BLOB}/docs/developer-guide/contributing.md`,
   examples: `${BLOB}/examples/README.md`,
   template: 'https://github.com/AnomalyNTE/Anomaly-Plugin-Template',
-  fairPlay: 'https://yh.wanmei.com/news/gamebroad/20260202/260701.html',
-  crediting: [
-    { name: 'Dear ImGui', url: 'https://github.com/ocornut/imgui' },
-    { name: 'MinHook', url: 'https://github.com/TsudaKageyu/minhook' },
-    { name: 'nlohmann/json', url: 'https://github.com/nlohmann/json' },
-    {
-      name: 'JSON schema validator',
-      url: 'https://github.com/pboettch/json-schema-validator'
-    },
-    { name: 'BLAKE3', url: 'https://github.com/BLAKE3-team/BLAKE3' },
-    { name: 'miniz', url: 'https://github.com/richgel999/miniz' },
-    { name: 'miniaudio', url: 'https://github.com/mackron/miniaudio' },
-    { name: 'RtAudio', url: 'https://github.com/thestk/rtaudio' },
-    { name: "Monkey's Audio SDK", url: 'https://www.monkeysaudio.com/' },
-    { name: 'dsd2pcm', url: 'https://github.com/GiangLH/dsd2pcm' },
-    { name: 'libarchive', url: 'https://github.com/libarchive/libarchive' },
-    { name: 'XZ Utils liblzma', url: 'https://github.com/tukaani-project/xz' },
-    { name: 'zlib', url: 'https://zlib.net/' },
-    { name: 'Noto Sans CJK', url: 'https://github.com/notofonts/noto-cjk' },
-    { name: 'Dalamud', url: 'https://github.com/goatcorp/Dalamud' }
-  ]
+  fairPlay: 'https://yh.wanmei.com/news/gamebroad/20260202/260701.html'
 }
 
 /** 下载渠道（URL 与语言无关，label / note 放在各语言字典里） */

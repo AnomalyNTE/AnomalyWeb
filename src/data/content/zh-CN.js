@@ -560,9 +560,8 @@ export default {
     userGuide: '用户文档',
     developerGuide: '开发者文档',
     apiReference: 'API 参考',
+    discord: 'Discord',
     issues: '问题反馈',
-    credits: '鸣谢：',
-    creditSep: '、',
     copyright: '© {year} AnomalyNTE · 以 GNU Affero General Public License v3.0（{license}）分发.'
   },
 

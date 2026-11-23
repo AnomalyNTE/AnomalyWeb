@@ -372,6 +372,9 @@ pre code { background: none; border: 0; padding: 0; white-space: pre; }
 .code-card h3:not(:first-child) { margin-top: 1.1rem; }
 .code-card pre { margin-bottom: .8rem; }
 
+/* 文档卡片下面那行补充说明：卡片带阴影，正文紧跟会贴在一起，单独留出间距 */
+.docs-footnote { margin: 1.4rem 0 0; }
+
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
 
 /* ---------------- Notices ---------------- */
@@ -530,9 +533,6 @@ tbody td b { color: var(--text); font-weight: 600; }
 .footer-links a:hover { color: var(--accent); }
 
 .footer-bottom { padding-top: 1.2rem; display: grid; gap: .35rem; }
-.footer-credits { margin: 0; }
-.footer-credits a { color: var(--text-dim); }
-.footer-credits a:hover { color: var(--accent); }
 
 /* ---------------- Responsive ---------------- */
 

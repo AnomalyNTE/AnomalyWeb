@@ -23,6 +23,6 @@ import { docCards, docs } from '../data/site.js'
       </a>
     </div>
 
-    <p class="muted small" v-html="docs.footnote"></p>
+    <p class="muted small docs-footnote" v-html="docs.footnote"></p>
   </section>
 </template>
